@@ -45,7 +45,9 @@ class SiteApi
             ]
         ]));
 
-        session(['user-api-token' => $response->body['token']]);
+        if($response->statusCode === 200) {
+            session(['user-api-token' => $response->body['token']]);
+        }
 
         return $response;
     }

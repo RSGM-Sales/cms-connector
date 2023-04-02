@@ -3,7 +3,7 @@
     "description": "Connector to handle all communication between CMS and frontend websites",
     "autoload": {
         "psr-4": {
-            "Fhsinchy\\Inspire\\": "src/"
+            "RSGMSales\\Connector\\": "src/"
         }
     },
     "authors": [

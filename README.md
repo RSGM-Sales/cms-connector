@@ -71,6 +71,6 @@ Add the Connector service provider to the package service providers in the /conf
 ...
 ```
 
-Run ```php artisan vendor:publish``` to publish the package files
+Run ```php artisan vendor:publish``` to publish the package files  
 This will create a connector.php file in your /config folder, you can configure the site id and basic authentication parameters here
 

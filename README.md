@@ -1,5 +1,5 @@
-# RSGM CMD Connector
-Connector to handle all API communication between Golds CMS en the front end websites
+# RSGM CMS Connector
+Connector to handle all API communication between Golds CMS and the front end websites
 
 ## Install
 

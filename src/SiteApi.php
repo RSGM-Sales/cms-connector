@@ -17,7 +17,7 @@ class SiteApi
 
         //TODO: Should the password be hashed in the auth header?
         $this->client = new Client([
-            'base_uri' => config('cms.base_url'),
+            'base_uri' => config('connector.apiBaseUrl'),
             'headers' => [
                 'Authorization' => "Basic " . base64_encode("$username:$password"),
                 'Site-Id' => $site,

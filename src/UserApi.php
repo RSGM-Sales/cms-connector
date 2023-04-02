@@ -18,7 +18,7 @@ class UserApi
         }
 
         return new Client([
-            'base_uri' => config('cms.base_url'),
+            'base_uri' => config('connector.apiBaseUrl'),
             'headers' => [
                 'Authorization' => "Bearer $token",
                 'Site-Id' => $site,

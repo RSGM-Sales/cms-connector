@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'base_url' => 'https://google.com/api',
     'endpoints' => [
         'site' => [
             'currencies' => '/currencies',

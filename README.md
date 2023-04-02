@@ -3,7 +3,7 @@ Connector to handle all API communication between Golds CMS and the front end we
 
 ## Install
 
-Add the github repository to your composer.json file:
+Add the github repository to your composer.json file: 
 
 ```
 ...

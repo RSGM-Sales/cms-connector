@@ -3,8 +3,6 @@
 namespace RSGMSales\Connector;
 
 use GuzzleHttp\Client;
-use mysql_xdevapi\Exception;
-use mysql_xdevapi\Result;
 
 class UserApi
 {

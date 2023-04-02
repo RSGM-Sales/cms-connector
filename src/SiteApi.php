@@ -15,7 +15,6 @@ class SiteApi
         $password = config('connector.site.password');
         $site = config('connector.site.id');
 
-        //TODO: Should the password be hashed in the auth header?
         $this->client = new Client([
             'base_uri' => config('connector.apiBaseUrl'),
             'headers' => [

@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Http;
 
 class Connector
 {
+    public SiteApi $site;
 
-    public function quote() {
-        $response = Http::get('https://inspiration.goprogram.ai/');
-        return $response['quote'] . ' -' . $response['author'];
+    public function __construct()
+    {
+        $this->site = new SiteApi();
     }
-
 }

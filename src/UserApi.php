@@ -3,8 +3,12 @@
 namespace RSGMSales\Connector;
 
 use GuzzleHttp\Client;
+use RSGMSales\Connector\Exceptions\MissingTokenException;
+use RSGMSales\Connector\Models\BaseApiResponse;
+use RSGMSales\Connector\Models\OrderData;
+use RSGMSales\Connector\Models\ProfileData;
 
-class UserApi
+class UserApi implements UserApiInterface
 {
     private function getClient(): Client {
         // I'm choosing to create a new client here on every request because I'm not sure when the user api token is being set in the session
@@ -12,7 +16,7 @@ class UserApi
         $site = config('connector.site.id');
 
         if($token == null) {
-            throw new MissingTokenExcpetion();
+            throw new MissingTokenException();
         }
 
         return new Client([
@@ -26,10 +30,10 @@ class UserApi
     }
 
     /**
-     * @throws MissingTokenExcpetion|\GuzzleHttp\Exception\GuzzleException
+     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function changeEmail(string $email): ApiResponse {
-        return new ApiResponse($this->getClient()->post(config('cms.endpoints.user.changeEmail'), [
+    public function changeEmail(string $email): BaseApiResponse {
+        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.changeEmail'), [
             'json' => [
                 'email' => $email
             ]
@@ -37,33 +41,33 @@ class UserApi
     }
 
     /**
-     * @throws MissingTokenExcpetion|\GuzzleHttp\Exception\GuzzleException
+     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function requestNewPassword(): ApiResponse {
-        return new ApiResponse($this->getClient()->get(config('cms.endpoints.user.changePassword')));
+    public function requestNewPassword(): BaseApiResponse {
+        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.changePassword')));
     }
 
     /**
-     * @throws MissingTokenExcpetion|\GuzzleHttp\Exception\GuzzleException
+     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function createOrder(OrderData $orderData): ApiResponse {
-        return new ApiResponse($this->getClient()->post(config('cms.endpoints.user.orders.create'), [
+    public function createOrder(OrderData $orderData): BaseApiResponse {
+        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.orders.create'), [
             'json' => $orderData
         ]));
     }
 
     /**
-     * @throws MissingTokenExcpetion|\GuzzleHttp\Exception\GuzzleException
+     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function getOrderHistory(): ApiResponse {
-        return new ApiResponse($this->getClient()->get(config('cms.endpoints.user.orders.history')));
+    public function getOrderHistory(): BaseApiResponse {
+        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.history')));
     }
 
     /**
-     * @throws MissingTokenExcpetion|\GuzzleHttp\Exception\GuzzleException
+     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function updateProfile(ProfileData $profileData): ApiResponse {
-        return new ApiResponse($this->getClient()->post(config('cms.endpoints.user.updateProfile', [
+    public function updateProfile(ProfileData $profileData): BaseApiResponse {
+        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.updateProfile', [
             'json' => $profileData
         ])));
     }

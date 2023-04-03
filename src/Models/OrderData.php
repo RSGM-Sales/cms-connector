@@ -1,6 +1,6 @@
 <?php
 
-namespace RSGMSales\Connector;
+namespace RSGMSales\Connector\Models;
 
 class OrderData
 {

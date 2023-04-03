@@ -6,6 +6,7 @@ return [
             'currencies' => '/api/currencies',
             'login' => '/api/users/login',
             'paymentMethods' => '/api/payment-methods',
+            'register' => '/api/users/register',
             'reviews' => '/api/reviews',
         ],
         'user' => [

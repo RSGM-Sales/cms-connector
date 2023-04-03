@@ -3,9 +3,9 @@
 namespace RSGMSales\Connector;
 
 use GuzzleHttp\Client;
-use Psr\Http\Message\ResponseInterface;
+use RSGMSales\Connector\Models\BaseApiResponse;
 
-class SiteApi
+class SiteApi implements SiteApiInterface
 {
     private Client $client;
 
@@ -25,23 +25,40 @@ class SiteApi
         ]);
     }
 
-    public function getCurrencies(): ApiResponse {
-        return new ApiResponse($this->client->get(config('cms.endpoints.site.currencies')));
+    public function getCurrencies(): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.currencies')));
     }
 
-    public function getPaymentMethods(): ApiResponse {
-        return new ApiResponse($this->client->get(config('cms.endpoints.site.paymentMethods')));
+    public function getPaymentMethods(): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.paymentMethods')));
     }
 
-    public function getReviews(): ApiResponse {
-        return new ApiResponse($this->client->get(config('cms.endpoints.site.reviews')));
+    public function getReviews(): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.reviews')));
     }
 
-    public function login($username, $password): ApiResponse {
-        $response = new ApiResponse($this->client->post(config('cms.endpoints.site.login'), [
+    public function login($username, $password): BaseApiResponse {
+        $response = BaseApiResponse::create($this->client->post(config('cms.endpoints.site.login'), [
             'json' => [
                 'username' => $username,
                 'password' => bcrypt($password)
+            ]
+        ]));
+
+        if($response->statusCode === 200) {
+            session(['user-api-token' => $response->body['token']]);
+        }
+
+        return $response;
+    }
+
+    public function register(string $username, string $password, string $name): BaseApiResponse
+    {
+        $response = BaseApiResponse::create($this->client->post(config('cms.endpoints.site.register'), [
+            'json' => [
+                'username' => $username,
+                'password' => bcrypt($password),
+                'name' => $name
             ]
         ]));
 

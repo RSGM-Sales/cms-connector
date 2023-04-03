@@ -10,16 +10,8 @@ Add the github repository to your composer.json file:
 "repositories": [
         ...
         {
-            "type": "package",
-            "package": {
-                "name": "rsgm-sales/cms-connector",
-                "version": "1.0.1",
-                "source": {
-                    "url": "git@github.com:RSGM-Sales/cms-connector.git",
-                    "type": "git",
-                    "reference": "master"
-                }
-            }
+            "type": "vcs",
+            "url": "https://github.com/RSGM-Sales/cms-connector.git"
         }
         ...
     ],

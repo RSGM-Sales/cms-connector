@@ -3,6 +3,7 @@
 namespace RSGMSales\Connector;
 
 use RSGMSales\Connector\Models\BaseApiResponse;
+use RSGMSales\Connector\Models\LoginApiResponse;
 
 class FakeSiteApi implements SiteApiInterface
 {
@@ -61,17 +62,17 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function login(string $username, string $password): BaseApiResponse
+    public function login(string $username, string $password): LoginApiResponse
     {
-        return $this->createResponse([
+        return new LoginApiResponse(200, '', [
             "username" => fake()->name(),
             "token" => fake()->uuid()
         ]);
     }
 
-    public function register(string $username, string $password, string $name): BaseApiResponse
+    public function register(string $username, string $password, string $name): LoginApiResponse
     {
-        return $this->createResponse([
+        return new LoginApiResponse(200, '', [
             "username" => $name,
             "token" => fake()->uuid()
         ]);

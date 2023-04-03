@@ -4,6 +4,7 @@ namespace RSGMSales\Connector;
 
 use GuzzleHttp\Client;
 use RSGMSales\Connector\Models\BaseApiResponse;
+use RSGMSales\Connector\Models\LoginApiResponse;
 
 class SiteApi implements SiteApiInterface
 {
@@ -37,8 +38,8 @@ class SiteApi implements SiteApiInterface
         return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.reviews')));
     }
 
-    public function login($username, $password): BaseApiResponse {
-        $response = BaseApiResponse::create($this->client->post(config('cms.endpoints.site.login'), [
+    public function login($username, $password): LoginApiResponse {
+        $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.login'), [
             'json' => [
                 'username' => $username,
                 'password' => bcrypt($password)
@@ -52,9 +53,9 @@ class SiteApi implements SiteApiInterface
         return $response;
     }
 
-    public function register(string $username, string $password, string $name): BaseApiResponse
+    public function register(string $username, string $password, string $name): LoginApiResponse
     {
-        $response = BaseApiResponse::create($this->client->post(config('cms.endpoints.site.register'), [
+        $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.register'), [
             'json' => [
                 'username' => $username,
                 'password' => bcrypt($password),

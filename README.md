@@ -13,7 +13,7 @@ Add the github repository to your composer.json file:
             "type": "package",
             "package": {
                 "name": "rsgm-sales/cms-connector",
-                "version": "1.0.0",
+                "version": "1.0.1",
                 "source": {
                     "url": "git@github.com:RSGM-Sales/cms-connector.git",
                     "type": "git",
@@ -26,19 +26,7 @@ Add the github repository to your composer.json file:
 ...
 ```
 
-Require the rsgm-sales/cms-connector package:
-
-```
-...
-    "require": {
-        ...
-        "rsgm-sales/cms-connector": "1.0.0"
-        ...
-    },
-...
-```
-
-Run ```composer update```
+Run ```composer require rsgm-sales/cms-connector```
 
 Add the package to autoload in your composer.json file:
 

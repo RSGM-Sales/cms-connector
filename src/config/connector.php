@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'apiBaseUrl' => 'https://example-url.com',
+    'apiBaseUrl' => 'http://localhost:8001',
     'site' => [
         'id' => 1,
         'username' => '',

@@ -3,19 +3,19 @@
 return [
     'endpoints' => [
         'site' => [
-            'currencies' => '/currencies',
-            'login' => '/users/login',
-            'paymentMethods' => '/payment-methods',
-            'reviews' => '/reviews',
+            'currencies' => '/api/currencies',
+            'login' => '/api/users/login',
+            'paymentMethods' => '/api/payment-methods',
+            'reviews' => '/api/reviews',
         ],
         'user' => [
-            'changeEmail' => '/users/change-email',
-            'changePassword' => '/users/change-password',
+            'changeEmail' => '/api/users/change-email',
+            'changePassword' => '/api/users/change-password',
             'orders' => [
-                'create' => '/orders',
-                'history' => '/users/orders'
+                'create' => '/api/orders',
+                'history' => '/api/users/orders'
             ],
-            'updateProfile' => '/users/profile',
+            'updateProfile' => '/api/users/profile',
         ]
     ]
 ];

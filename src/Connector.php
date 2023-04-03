@@ -15,14 +15,4 @@ class Connector
         $this->site = new SiteApi();
         $this->user = new UserApi();
     }
-
-    public function test() {
-        $client = new \GuzzleHttp\Client();
-
-        return new ApiResponse($client->post('http://localhost:8001/api/test', [
-            'json' => [
-                'foo' => 'barrrrr'
-            ]
-        ]));
-    }
 }

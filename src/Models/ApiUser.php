@@ -14,6 +14,8 @@ class ApiUser extends Authenticatable
     {
         $this->username = $username;
         $this->token = $token;
+
+        parent::__construct();
     }
 
     public function username(): string {

@@ -12,12 +12,37 @@ class FakeSiteApi implements SiteApiInterface
         return new BaseApiResponse(200, "", $body);
     }
 
+    public function getGames(): BaseApiResponse {
+        return $this->createResponse([
+            "data" => [
+                "games" => [
+                    (object)[
+                        "id" => 1,
+                        "name" => "RuneScape",
+                        "products" => [
+                            (object)[
+                                "id" => 1,
+                                "name" => "OSRS",
+                                "pricePerUnit" => 0.25
+                            ],
+                            (object)[
+                                "id" => 2,
+                                "name" => "RS3",
+                                "pricePerUnit" => 1.13
+                            ],
+                        ]g
+                    ]
+                ]
+            ]
+        ]);
+    }
+
     public function getCurrencies(): BaseApiResponse
     {
         return $this->createResponse([
             "data" => [
-                (object)[ "id" => 1, "name" => "Euro", "code" => "EUR", "rate" => 1.5 ],
-                (object)[ "id" => 2, "name" => "Dollar", "code" => "USD", "rate" => 2 ],
+                (object)[ "id" => 1, "name" => "Euro", "code" => "EUR", "rate" => 1.5, "symbol" => "€" ],
+                (object)[ "id" => 2, "name" => "Dollar", "code" => "USD", "rate" => 2, "symbol" => "$" ],
             ]
         ]);
     }
@@ -64,17 +89,23 @@ class FakeSiteApi implements SiteApiInterface
 
     public function login(string $username, string $password): LoginApiResponse
     {
+        $token = fake()->uuid();
+        session(['user-api-token' => $token]);
+
         return new LoginApiResponse(200, '', [
             "username" => fake()->name(),
-            "token" => fake()->uuid()
+            "token" => $token
         ]);
     }
 
     public function register(string $username, string $password, string $name): LoginApiResponse
     {
+        $token = fake()->uuid();
+        session(['user-api-token' => $token]);
+
         return new LoginApiResponse(200, '', [
             "username" => $name,
-            "token" => fake()->uuid()
+            "token" => $token
         ]);
     }
 }

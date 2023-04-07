@@ -1,6 +1,6 @@
 <?php
 
-namespace RSGMSales\Connector\Models;
+namespace RSGMSales\Connector\Responses;
 
 use GuzzleHttp\Psr7\Response;
 
@@ -25,7 +25,7 @@ class BaseApiResponse
     }
 
     public static function create(Response $response): BaseApiResponse {
-        $instance = new BaseApiResponse($response->getStatusCode(), $response->getReasonPhrase(), $response->getBody()->getContents());
+        $instance = new BaseApiResponse($response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
         $instance->response = $response;
         return $instance;
     }

@@ -2,8 +2,8 @@
 
 namespace RSGMSales\Connector;
 
-use RSGMSales\Connector\Models\BaseApiResponse;
-use RSGMSales\Connector\Models\LoginApiResponse;
+use RSGMSales\Connector\Responses\BaseApiResponse;
+use RSGMSales\Connector\Responses\LoginApiResponse;
 
 class FakeSiteApi implements SiteApiInterface
 {
@@ -41,8 +41,8 @@ class FakeSiteApi implements SiteApiInterface
     {
         return $this->createResponse([
             "data" => [
-                (object)[ "id" => 1, "name" => "Euro", "code" => "EUR", "rate" => 1.5, "symbol" => "€" ],
-                (object)[ "id" => 2, "name" => "Dollar", "code" => "USD", "rate" => 2, "symbol" => "$" ],
+                (object)[ "id" => 1, "name" => "Euro", "code" => "EUR", "rate" => 1, "symbol" => "€" ],
+                (object)[ "id" => 2, "name" => "Dollar", "code" => "USD", "rate" => 0.90, "symbol" => "$" ],
             ]
         ]);
     }

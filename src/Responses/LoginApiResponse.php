@@ -1,8 +1,9 @@
 <?php
 
-namespace RSGMSales\Connector\Models;
+namespace RSGMSales\Connector\Responses;
 
 use GuzzleHttp\Psr7\Response;
+use RSGMSales\Connector\Models\ApiUser;
 
 class LoginApiResponse extends BaseApiResponse
 {
@@ -16,7 +17,7 @@ class LoginApiResponse extends BaseApiResponse
     }
 
     public static function create(Response $response): LoginApiResponse {
-        $instance = new LoginApiResponse($response->getStatusCode(), $response->getReasonPhrase(), $response->getBody()->getContents());
+        $instance = new LoginApiResponse($response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
         $instance->response = $response;
         $instance->user = new ApiUser($instance->body["username"], $instance->body["token"]);
         return $instance;

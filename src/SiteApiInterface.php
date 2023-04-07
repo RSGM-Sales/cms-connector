@@ -2,13 +2,14 @@
 
 namespace RSGMSales\Connector;
 
-use RSGMSales\Connector\Models\BaseApiResponse;
-use RSGMSales\Connector\Models\LoginApiResponse;
+use RSGMSales\Connector\Responses\BaseApiResponse;
+use RSGMSales\Connector\Responses\CurrencyApiResponse;
+use RSGMSales\Connector\Responses\LoginApiResponse;
 
 interface SiteApiInterface
 {
     public function getGames(): BaseApiResponse;
-    public function getCurrencies(): BaseApiResponse;
+    public function getCurrencies(): CurrencyApiResponse;
     public function getPaymentMethods(): BaseApiResponse;
     public function getReviews(): BaseApiResponse;
     public function login(string $username, string $password): LoginApiResponse;

@@ -2,9 +2,9 @@
 
 namespace RSGMSales\Connector;
 
-use RSGMSales\Connector\Models\BaseApiResponse;
 use RSGMSales\Connector\Models\OrderData;
 use RSGMSales\Connector\Models\ProfileData;
+use RSGMSales\Connector\Responses\BaseApiResponse;
 
 class FakeUserApi implements UserApiInterface
 {

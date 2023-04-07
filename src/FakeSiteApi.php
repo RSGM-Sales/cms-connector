@@ -30,7 +30,7 @@ class FakeSiteApi implements SiteApiInterface
                                 "name" => "RS3",
                                 "pricePerUnit" => 1.13
                             ],
-                        ]g
+                        ]
                     ]
                 ]
             ]

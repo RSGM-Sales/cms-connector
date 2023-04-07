@@ -7,6 +7,7 @@ use RSGMSales\Connector\Models\LoginApiResponse;
 
 interface SiteApiInterface
 {
+    public function getGames(): BaseApiResponse;
     public function getCurrencies(): BaseApiResponse;
     public function getPaymentMethods(): BaseApiResponse;
     public function getReviews(): BaseApiResponse;

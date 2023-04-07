@@ -4,6 +4,7 @@ return [
     'endpoints' => [
         'site' => [
             'currencies' => '/api/currencies',
+            'games' => '/api/games',
             'login' => '/api/users/login',
             'paymentMethods' => '/api/payment-methods',
             'register' => '/api/users/register',

@@ -26,6 +26,10 @@ class SiteApi implements SiteApiInterface
         ]);
     }
 
+    public function getGames(): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.games')));
+    }
+
     public function getCurrencies(): BaseApiResponse {
         return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.currencies')));
     }

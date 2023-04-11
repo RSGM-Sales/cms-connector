@@ -1,12 +1,11 @@
 <?php
 
-namespace RSGMSales\Connector\Models;
+namespace RSGMSales\Connector\Dto;
 
 use RSGMSales\Connector\Responses\BaseApiResponse;
 
 abstract class BaseApiModel
 {
-
     abstract static function Create(mixed $data): self;
 
     /**

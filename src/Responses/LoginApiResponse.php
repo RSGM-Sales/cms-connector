@@ -3,7 +3,7 @@
 namespace RSGMSales\Connector\Responses;
 
 use GuzzleHttp\Psr7\Response;
-use RSGMSales\Connector\Models\ApiUser;
+use RSGMSales\Connector\Dto\ApiUser;
 
 class LoginApiResponse extends BaseApiResponse
 {

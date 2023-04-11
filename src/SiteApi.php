@@ -5,6 +5,7 @@ namespace RSGMSales\Connector;
 use GuzzleHttp\Client;
 use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\CurrencyApiResponse;
+use RSGMSales\Connector\Responses\GameApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
 
 class SiteApi implements SiteApiInterface
@@ -27,8 +28,8 @@ class SiteApi implements SiteApiInterface
         ]);
     }
 
-    public function getGames(): BaseApiResponse {
-        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.games')));
+    public function getGames(): GameApiResponse {
+        return GameApiResponse::create($this->client->get(config('cms.endpoints.site.games')));
     }
 
     public function getCurrencies(): CurrencyApiResponse {

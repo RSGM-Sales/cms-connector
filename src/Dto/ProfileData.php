@@ -1,6 +1,6 @@
 <?php
 
-namespace RSGMSales\Connector\Models;
+namespace RSGMSales\Connector\Dto;
 
 class ProfileData
 {

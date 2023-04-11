@@ -1,6 +1,6 @@
 <?php
 
-namespace RSGMSales\Connector\Models;
+namespace RSGMSales\Connector\Dto;
 
 use RSGMSales\Connector\Responses\BaseApiResponse;
 
@@ -26,14 +26,14 @@ class Currency extends BaseApiModel
     }
 
     /**
-     * @param BaseApiResponse $response
+     * @param mixed $data
      * @return Currency[]
      */
-    public static function Deserialize(BaseApiResponse $response): array {
+    public static function Deserialize(mixed $data): array {
         $currencies = [];
 
-        foreach ($response->body->data as $data) {
-            $currencies[] = Currency::create($data);
+        foreach ($data as $item) {
+            $currencies[] = Currency::create($item);
         }
 
         return $currencies;

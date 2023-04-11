@@ -4,8 +4,8 @@ namespace RSGMSales\Connector;
 
 use GuzzleHttp\Client;
 use RSGMSales\Connector\Exceptions\MissingTokenException;
-use RSGMSales\Connector\Models\OrderData;
-use RSGMSales\Connector\Models\ProfileData;
+use RSGMSales\Connector\Dto\OrderData;
+use RSGMSales\Connector\Dto\ProfileData;
 use RSGMSales\Connector\Responses\BaseApiResponse;
 
 class UserApi implements UserApiInterface

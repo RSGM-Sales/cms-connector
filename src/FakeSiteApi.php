@@ -3,6 +3,8 @@
 namespace RSGMSales\Connector;
 
 use RSGMSales\Connector\Responses\BaseApiResponse;
+use RSGMSales\Connector\Responses\CurrencyApiResponse;
+use RSGMSales\Connector\Responses\GameApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
 
 class FakeSiteApi implements SiteApiInterface
@@ -12,37 +14,44 @@ class FakeSiteApi implements SiteApiInterface
         return new BaseApiResponse(200, "", $body);
     }
 
-    public function getGames(): BaseApiResponse {
-        return $this->createResponse([
+    public function getGames(): GameApiResponse {
+        return new GameApiResponse(200, "", (object)[
             "data" => [
-                "games" => [
-                    (object)[
-                        "id" => 1,
-                        "name" => "RuneScape",
-                        "products" => [
-                            (object)[
-                                "id" => 1,
+                (object)[
+                    "id" => 1,
+                    "type" => "game",
+                    "attributes" => (object)[
+                        "name" => "RuneScape"
+                    ],
+                    "relationships" => [
+                        (object)[
+                            "id" => 1,
+                            "type" => "product",
+                            "attributes" => (object) [
                                 "name" => "OSRS",
                                 "pricePerUnit" => 0.25
-                            ],
-                            (object)[
-                                "id" => 2,
+                            ]
+                        ],
+                        (object)[
+                            "id" => 2,
+                            "type" => "product",
+                            "attributes" => (object) [
                                 "name" => "RS3",
                                 "pricePerUnit" => 1.13
-                            ],
-                        ]
+                            ]
+                        ],
                     ]
                 ]
             ]
         ]);
     }
 
-    public function getCurrencies(): BaseApiResponse
+    public function getCurrencies(): CurrencyApiResponse
     {
-        return $this->createResponse([
+        return new CurrencyApiResponse(200, "", (object)[
             "data" => [
-                (object)[ "id" => 1, "name" => "Euro", "code" => "EUR", "rate" => 1, "symbol" => "€" ],
-                (object)[ "id" => 2, "name" => "Dollar", "code" => "USD", "rate" => 0.90, "symbol" => "$" ],
+                (object)[ "id" => 1, "attributes" => (object)["name" => "Euro", "code" => "EUR", "rate" => 1, "symbol" => "€"] ],
+                (object)[ "id" => 2, "attributes" => (object)["name" => "Dollar", "code" => "USD", "rate" => 0.90, "symbol" => "$" ] ],
             ]
         ]);
     }

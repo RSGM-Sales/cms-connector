@@ -3,7 +3,7 @@
 namespace RSGMSales\Connector\Responses;
 
 use GuzzleHttp\Psr7\Response;
-use RSGMSales\Connector\Models\Currency;
+use RSGMSales\Connector\Dto\Currency;
 
 class CurrencyApiResponse extends BaseApiResponse
 {
@@ -23,6 +23,6 @@ class CurrencyApiResponse extends BaseApiResponse
      * @return Currency[]
      */
     public function currencies(): array {
-        return Currency::Deserialize($this);
+        return Currency::Deserialize($this->body->data);
     }
 }

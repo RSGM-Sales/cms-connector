@@ -30,12 +30,12 @@ class Currency extends BaseApiModel
      * @return Currency[]
      */
     public static function Deserialize(mixed $data): array {
-        $currencies = [];
+        $items = [];
 
         foreach ($data as $item) {
-            $currencies[] = Currency::create($item);
+            $items[] = Currency::create($item);
         }
 
-        return $currencies;
+        return $items;
     }
 }

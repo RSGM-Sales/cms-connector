@@ -7,6 +7,7 @@ use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\CurrencyApiResponse;
 use RSGMSales\Connector\Responses\GameApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
+use RSGMSales\Connector\Responses\PaymentOptionApiResponse;
 use RSGMSales\Connector\Responses\ReviewApiResponse;
 
 class SiteApi implements SiteApiInterface
@@ -37,8 +38,8 @@ class SiteApi implements SiteApiInterface
         return CurrencyApiResponse::create($this->client->get(config('cms.endpoints.site.currencies')));
     }
 
-    public function getPaymentMethods(): BaseApiResponse {
-        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.paymentMethods')));
+    public function getPaymentMethods(): PaymentOptionApiResponse {
+        return PaymentOptionApiResponse::create($this->client->get(config('cms.endpoints.site.paymentMethods')));
     }
 
     public function getReviews(): ReviewApiResponse {

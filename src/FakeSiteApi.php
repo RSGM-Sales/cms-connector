@@ -6,15 +6,11 @@ use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\CurrencyApiResponse;
 use RSGMSales\Connector\Responses\GameApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
+use RSGMSales\Connector\Responses\PaymentOptionApiResponse;
 use RSGMSales\Connector\Responses\ReviewApiResponse;
 
 class FakeSiteApi implements SiteApiInterface
 {
-    private function createResponse(mixed $body): BaseApiResponse
-    {
-        return new BaseApiResponse(200, "", $body);
-    }
-
     public function getGames(): GameApiResponse {
         return new GameApiResponse(200, "", (object)[
             "data" => [
@@ -57,9 +53,9 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function getPaymentMethods(): BaseApiResponse
+    public function getPaymentMethods(): PaymentOptionApiResponse
     {
-        return $this->createResponse([
+        return new PaymentOptionApiResponse(200, "", (object)[
             "data" => [
                 (object)[ "id" => 1, "name" => "Bancontact (Terminal 3)", "fee" => 0, "icon" => "" ],
                 (object)[ "id" => 2, "name" => "Bancontact (G2A)", "fee" => 0, "icon" => "" ],

@@ -9,8 +9,8 @@ abstract class BaseApiModel
     abstract static function Create(mixed $data): self;
 
     /**
-     * @param BaseApiResponse $data
+     * @param mixed $data
      * @return self[]
      */
-    abstract static function Deserialize(BaseApiResponse $response): array;
+    abstract static function Deserialize(mixed $data): array;
 }

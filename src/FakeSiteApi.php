@@ -6,6 +6,7 @@ use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\CurrencyApiResponse;
 use RSGMSales\Connector\Responses\GameApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
+use RSGMSales\Connector\Responses\ReviewApiResponse;
 
 class FakeSiteApi implements SiteApiInterface
 {
@@ -84,14 +85,21 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function getReviews(): BaseApiResponse
+    public function getReviews(): ReviewApiResponse
     {
         $data = [];
         for ($i = 0; $i < 6; $i++) {
-            $data[] = (object)[ "name" => fake()->name(), "rating" => 5, "text" => fake()->realText()];
+            $data[] = (object)[
+                "id" => $i,
+                "attributes" => (object)[
+                    "name" => fake()->name(),
+                    "rating" => 5,
+                    "text" => fake()->realText(fake()->numberBetween(50,400))
+                ]
+            ];
         }
 
-        return $this->createResponse([
+        return new ReviewApiResponse(200, "", (object)[
             "data" => $data
         ]);
     }

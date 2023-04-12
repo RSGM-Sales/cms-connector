@@ -7,6 +7,7 @@ use RSGMSales\Connector\Exceptions\MissingTokenException;
 use RSGMSales\Connector\Dto\OrderData;
 use RSGMSales\Connector\Dto\ProfileData;
 use RSGMSales\Connector\Responses\BaseApiResponse;
+use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
 class UserApi implements UserApiInterface
 {
@@ -59,8 +60,8 @@ class UserApi implements UserApiInterface
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function getOrderHistory(): BaseApiResponse {
-        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.history')));
+    public function getOrderHistory(): OrderHistoryApiResponse {
+        return OrderHistoryApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.history')));
     }
 
     /**

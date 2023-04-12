@@ -57,26 +57,78 @@ class FakeSiteApi implements SiteApiInterface
     {
         return new PaymentOptionApiResponse(200, "", (object)[
             "data" => [
-                (object)[ "id" => 1, "name" => "Bancontact (Terminal 3)", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 2, "name" => "Bancontact (G2A)", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 3, "name" => "Visa (Terminal 3)", "fee" => 2.5, "icon" => "" ],
-                (object)[ "id" => 4, "name" => "Visa (G2A)", "fee" => 2.5, "icon" => "" ],
-                (object)[ "id" => 5, "name" => "WeChat", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 6, "name" => "Poli", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 7, "name" => "Interact", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 8, "name" => "Paysafe card", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 9, "name" => "Ideal", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 10, "name" => "sofort", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 11, "name" => "Trustly", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 12, "name" => "GiroPay", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 13, "name" => "Neteller", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 14, "name" => "Skrill", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 15, "name" => "EPS", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 16, "name" => "przelewy24", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 17, "name" => "blik", "fee" => 1, "icon" => "" ],
-                (object)[ "id" => 18, "name" => "AliPay", "fee" => 2, "icon" => "" ],
-                (object)[ "id" => 19, "name" => "Web money", "fee" => 0, "icon" => "" ],
-                (object)[ "id" => 20, "name" => "Mint", "fee" => 0, "icon" => "" ],
+                (object)[
+                    "id" => 1,
+                    "type" => "paymentProviderPaymentMethod",
+                    "attributes" => (object)[ "fee" => 0 ],
+                    "relationships" => (object)[
+                        "paymentMethod" => (object)[ "id" => 1, "type" => "paymentMethod", "attributes" => (object)[ "name" => "Bancontact" ]],
+                        "paymentProvider" => (object)[ "id" => 1, "type" => "paymentProvider", "attributes" => (object)[ "name" => "G2A" ]],
+                    ]
+                ],
+                (object)[
+                    "id" => 2,
+                    "type" => "paymentProviderPaymentMethod",
+                    "attributes" => (object)[ "fee" => 0.15 ],
+                    "relationships" => (object)[
+                        "paymentMethod" => (object)[ "id" => 2, "type" => "paymentMethod", "attributes" => (object)[ "name" => "Visa" ]],
+                        "paymentProvider" => (object)[ "id" => 1, "type" => "paymentProvider", "attributes" => (object)[ "name" => "G2A" ]],
+                    ]
+                ],
+                (object)[
+                    "id" => 3,
+                    "type" => "paymentProviderPaymentMethod",
+                    "attributes" => (object)[ "fee" => 0 ],
+                    "relationships" => (object)[
+                        "paymentMethod" => (object)[ "id" => 1, "type" => "paymentMethod", "attributes" => (object)[ "name" => "Bancontact" ]],
+                        "paymentProvider" => (object)[ "id" => 2, "type" => "paymentProvider", "attributes" => (object)[ "name" => "Terminal 3" ]],
+                    ]
+                ],
+                (object)[
+                    "id" => 4,
+                    "type" => "paymentProviderPaymentMethod",
+                    "attributes" => (object)[ "fee" => 0.2 ],
+                    "relationships" => (object)[
+                        "paymentMethod" => (object)[ "id" => 2, "type" => "paymentMethod", "attributes" => (object)[ "name" => "Visa" ]],
+                        "paymentProvider" => (object)[ "id" => 2, "type" => "paymentProvider", "attributes" => (object)[ "name" => "Terminal 3" ]],
+                    ]
+                ],
+                (object)[
+                    "id" => 5,
+                    "type" => "paymentProviderPaymentMethod",
+                    "attributes" => (object)[ "fee" => 0 ],
+                    "relationships" => (object)[
+                        "paymentMethod" => (object)[ "id" => 3, "type" => "paymentMethod", "attributes" => (object)[ "name" => "WeChat" ]],
+                        "paymentProvider" => (object)[ "id" => 3, "type" => "paymentProvider", "attributes" => (object)[ "name" => "WeChat" ]],
+                    ]
+                ],
+                (object)[
+                    "id" => 6,
+                    "type" => "paymentProviderPaymentMethod",
+                    "attributes" => (object)[ "fee" => 0 ],
+                    "relationships" => (object)[
+                        "paymentMethod" => (object)[ "id" => 4, "type" => "paymentMethod", "attributes" => (object)[ "name" => "Poli" ]],
+                        "paymentProvider" => (object)[ "id" => 4, "type" => "paymentProvider", "attributes" => (object)[ "name" => "Poli" ]],
+                    ]
+                ],
+                (object)[
+                    "id" => 7,
+                    "type" => "paymentProviderPaymentMethod",
+                    "attributes" => (object)[ "fee" => 0 ],
+                    "relationships" => (object)[
+                        "paymentMethod" => (object)[ "id" => 4, "type" => "paymentMethod", "attributes" => (object)[ "name" => "Interact" ]],
+                        "paymentProvider" => (object)[ "id" => 4, "type" => "paymentProvider", "attributes" => (object)[ "name" => "Interact" ]],
+                    ]
+                ],
+                (object)[
+                    "id" => 8,
+                    "type" => "paymentProviderPaymentMethod",
+                    "attributes" => (object)[ "fee" => 0.3 ],
+                    "relationships" => (object)[
+                        "paymentMethod" => (object)[ "id" => 5, "type" => "paymentMethod", "attributes" => (object)[ "name" => "Paysafe card" ]],
+                        "paymentProvider" => (object)[ "id" => 5, "type" => "paymentProvider", "attributes" => (object)[ "name" => "Paysafe card" ]],
+                    ]
+                ]
             ]
         ]);
     }

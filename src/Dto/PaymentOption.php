@@ -19,7 +19,7 @@ class PaymentOption extends BaseApiModel
 
     static function Create(mixed $data): PaymentOption
     {
-        return new PaymentOption($data->id, PaymentMethod::Deserialize($data->relationships)[0], PaymentProvider::Deserialize($data->relationships)[0], $data->attributes->fee);
+        return new PaymentOption($data->id, PaymentMethod::Create($data->relationships->paymentMethod), PaymentProvider::Create($data->relationships->paymentProvider), $data->attributes->fee);
     }
 
     static function Deserialize(mixed $data): array

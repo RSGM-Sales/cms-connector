@@ -26,4 +26,34 @@ class PaymentOptionApiResponse extends BaseApiResponse
     {
         return PaymentOption::Deserialize($this->body->data);
     }
+
+    public function paymentOptionsGrouped(): array {
+        $data = [];
+
+        foreach($this->paymentOptions() as $option) {
+            $methodFound = false;
+
+            $currentPaymentOption = (object)[
+                'name' =>$option->paymentProvider->name,
+                'fee' =>$option->fee
+            ];
+
+            foreach($data as $existingOption) {
+                if($existingOption->name === $option->paymentMethod->name) {
+                    $methodFound = true;
+                    $existingOption->options[] = $currentPaymentOption;
+                    break;
+                }
+            }
+
+            if(!$methodFound) {
+                $data[] = (object)[
+                    'name' => $option->paymentMethod->name,
+                    'options' => [ $currentPaymentOption ]
+                ];
+            }
+        }
+
+        return $data;
+    }
 }

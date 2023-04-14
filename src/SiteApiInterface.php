@@ -16,5 +16,6 @@ interface SiteApiInterface
     public function getPaymentMethods(): PaymentOptionApiResponse;
     public function getReviews(): ReviewApiResponse;
     public function login(string $username, string $password): LoginApiResponse;
+    public function logout(): void;
     public function register(string $username, string $password, string $name): LoginApiResponse;
 }

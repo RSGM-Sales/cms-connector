@@ -61,6 +61,11 @@ class SiteApi implements SiteApiInterface
         return $response;
     }
 
+    public function logout(): void
+    {
+        session(['user-api-token' => null]);
+    }
+
     public function register(string $username, string $password, string $name): LoginApiResponse
     {
         $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.register'), [

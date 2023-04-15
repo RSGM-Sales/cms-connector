@@ -11,7 +11,7 @@ use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
 class FakeUserApi implements UserApiInterface
 {
-    public function createFeedback(UserFeedbackData $feedbackData): BaseApiResponseg
+    public function createFeedback(UserFeedbackData $feedbackData): BaseApiResponse
     {
         return new BaseApiResponse();
     }

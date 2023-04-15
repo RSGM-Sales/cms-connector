@@ -3,6 +3,7 @@
 namespace RSGMSales\Connector;
 
 use RSGMSales\Connector\Dto\OrderData;
+use RSGMSales\Connector\Dto\UserFeedbackData;
 use RSGMSales\Connector\Dto\UserPreferencesData;
 use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
@@ -10,6 +11,10 @@ use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
 class FakeUserApi implements UserApiInterface
 {
+    public function createFeedback(UserFeedbackData $feedbackData): BaseApiResponseg
+    {
+        return new BaseApiResponse();
+    }
     public function requestNewPassword(string $redirectUrl): BaseApiResponse
     {
         return new BaseApiResponse();
@@ -59,6 +64,4 @@ class FakeUserApi implements UserApiInterface
     {
         return new BaseApiResponse();
     }
-
-
 }

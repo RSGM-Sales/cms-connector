@@ -4,6 +4,7 @@ namespace RSGMSales\Connector;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use RSGMSales\Connector\Dto\UserFeedbackData;
 use RSGMSales\Connector\Exceptions\MissingTokenException;
 use RSGMSales\Connector\Dto\OrderData;
 use RSGMSales\Connector\Dto\UserPreferencesData;
@@ -13,6 +14,12 @@ use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
 class UserApi implements UserApiInterface
 {
+    public function createFeedback(UserFeedbackData $feedbackData): BaseApiResponse
+    {
+        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.feedback.create'), [
+            'json' => $feedbackData
+        ]));
+    }
     private function getClient(): Client {
         // I'm choosing to create a new client here on every request because I'm not sure when the user api token is being set in the session
         $token = session('user-api-token');
@@ -86,6 +93,7 @@ class UserApi implements UserApiInterface
             'json' => $profileData
         ])));
     }
+
 
 
 }

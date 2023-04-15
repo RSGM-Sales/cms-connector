@@ -13,6 +13,10 @@ return [
         'user' => [
             'changeEmail' => '/api/users/change-email',
             'changePassword' => '/api/users/change-password',
+            'changePasswordRequest' => '/api/users/request-new-password',
+            'feedback' => [
+                'create' => '/api/feedback'
+            ],
             'orders' => [
                 'create' => '/api/orders',
                 'history' => '/api/users/orders'

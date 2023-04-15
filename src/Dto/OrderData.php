@@ -5,6 +5,8 @@ namespace RSGMSales\Connector\Dto;
 class OrderData
 {
 
+    public int $productId;
+
     /**
      * The amount of mills (/product) that the user would like to order
      * @var float|int
@@ -20,12 +22,17 @@ class OrderData
     public string $coupon;
     public int $paymentMethodId;
 
-    public function __construct(float $amount, int $currencyId, string $runescapeName, int $paymentMethodId, string $coupon = '',)
+    public function __construct(int $productId, float $amount, int $currencyId, string $runescapeName, int $paymentMethodId, string $coupon = '')
     {
+        $this->productId = $productId;
         $this->amount = $amount;
         $this->currencyId = $currencyId;
         $this->runescapeName = $runescapeName;
         $this->coupon = $coupon;
         $this->paymentMethodId = $paymentMethodId;
+    }
+
+    public static function create(int $productId, float $amount, int $currencyId, string $runescapeName, int $paymentMethodId, string $coupon = ''): OrderData {
+        return new OrderData($productId, $amount, $currencyId, $runescapeName, $paymentMethodId, $coupon);
     }
 }

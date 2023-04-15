@@ -3,10 +3,12 @@
 namespace RSGMSales\Connector;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use RSGMSales\Connector\Exceptions\MissingTokenException;
 use RSGMSales\Connector\Dto\OrderData;
-use RSGMSales\Connector\Dto\ProfileData;
+use RSGMSales\Connector\Dto\UserPreferencesData;
 use RSGMSales\Connector\Responses\BaseApiResponse;
+use RSGMSales\Connector\Responses\LoginApiResponse;
 use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
 class UserApi implements UserApiInterface
@@ -33,19 +35,31 @@ class UserApi implements UserApiInterface
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function changeEmail(string $email): BaseApiResponse {
-        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.changeEmail'), [
-            'json' => [
-                'email' => $email
+    public function requestNewPassword(string $redirectUrl): BaseApiResponse {
+        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.changePasswordRequest'), [
+            'query' => [
+                'redirectUrl' => $redirectUrl
             ]
         ]));
     }
 
     /**
-     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
+     * @throws MissingTokenException
      */
-    public function requestNewPassword(): BaseApiResponse {
-        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.changePassword')));
+    public function setNewPassword(string $password): LoginApiResponse
+    {
+        $response = LoginApiResponse::create($this->getClient()->post(config('cms.endpoints.user.changePassword'), [
+            'json' => [
+                'password' => $password
+            ]
+        ]));
+
+        if($response->statusCode === 200) {
+            session(['user-api-token' => $response->body['token']]);
+        }
+
+        return $response;
     }
 
     /**
@@ -67,9 +81,11 @@ class UserApi implements UserApiInterface
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function updateProfile(ProfileData $profileData): BaseApiResponse {
+    public function updateProfile(UserPreferencesData $profileData): BaseApiResponse {
         return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.updateProfile', [
             'json' => $profileData
         ])));
     }
+
+
 }

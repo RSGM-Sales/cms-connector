@@ -3,21 +3,27 @@
 namespace RSGMSales\Connector;
 
 use RSGMSales\Connector\Dto\OrderData;
-use RSGMSales\Connector\Dto\ProfileData;
+use RSGMSales\Connector\Dto\UserPreferencesData;
 use RSGMSales\Connector\Responses\BaseApiResponse;
+use RSGMSales\Connector\Responses\LoginApiResponse;
 use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
 class FakeUserApi implements UserApiInterface
 {
-
-    public function changeEmail(string $email): BaseApiResponse
+    public function requestNewPassword(string $redirectUrl): BaseApiResponse
     {
         return new BaseApiResponse();
     }
 
-    public function requestNewPassword(): BaseApiResponse
+    public function setNewPassword(string $password): LoginApiResponse
     {
-        return new BaseApiResponse();
+        $token = fake()->uuid();
+        session(['user-api-token' => $token]);
+
+        return new LoginApiResponse(200, '', [
+            "username" => fake()->name(),
+            "token" => $token
+        ]);
     }
 
     public function createOrder(OrderData $orderData): BaseApiResponse
@@ -49,8 +55,10 @@ class FakeUserApi implements UserApiInterface
         ]);
     }
 
-    public function updateProfile(ProfileData $profileData): BaseApiResponse
+    public function updateProfile(UserPreferencesData $profileData): BaseApiResponse
     {
         return new BaseApiResponse();
     }
+
+
 }

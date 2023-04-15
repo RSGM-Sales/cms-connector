@@ -2,8 +2,8 @@
 
 namespace RSGMSales\Connector;
 
-use RSGMSales\Connector\Dto\OrderData;
-use RSGMSales\Connector\Dto\UserFeedbackData;
+use RSGMSales\Connector\Dto\CreateOrderData;
+use RSGMSales\Connector\Dto\CreateReviewData;
 use RSGMSales\Connector\Dto\UserPreferencesData;
 use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
@@ -11,7 +11,7 @@ use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
 class FakeUserApi implements UserApiInterface
 {
-    public function createFeedback(UserFeedbackData $feedbackData): BaseApiResponse
+    public function createReview(CreateReviewData $feedbackData): BaseApiResponse
     {
         return new BaseApiResponse();
     }
@@ -31,7 +31,7 @@ class FakeUserApi implements UserApiInterface
         ]);
     }
 
-    public function createOrder(OrderData $orderData): BaseApiResponse
+    public function createOrder(CreateOrderData $orderData): BaseApiResponse
     {
         return new BaseApiResponse();
     }

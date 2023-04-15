@@ -7,6 +7,8 @@ use RSGMSales\Connector\Dto\Order;
 
 class OrderHistoryApiResponse extends BaseApiResponse
 {
+    public int $currentpage;
+    public int $totalPages;
 
     public function __construct(int $statusCode = 200, string $reasonPhrase = "", mixed $body = null)
     {

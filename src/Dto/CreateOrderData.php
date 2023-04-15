@@ -2,7 +2,7 @@
 
 namespace RSGMSales\Connector\Dto;
 
-class OrderData
+class CreateOrderData
 {
 
     public int $productId;
@@ -32,7 +32,7 @@ class OrderData
         $this->paymentMethodId = $paymentMethodId;
     }
 
-    public static function create(int $productId, float $amount, int $currencyId, string $runescapeName, int $paymentMethodId, string $coupon = ''): OrderData {
-        return new OrderData($productId, $amount, $currencyId, $runescapeName, $paymentMethodId, $coupon);
+    public static function create(int $productId, float $amount, int $currencyId, string $runescapeName, int $paymentMethodId, string $coupon = ''): CreateOrderData {
+        return new CreateOrderData($productId, $amount, $currencyId, $runescapeName, $paymentMethodId, $coupon);
     }
 }

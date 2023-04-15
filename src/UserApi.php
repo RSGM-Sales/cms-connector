@@ -4,9 +4,9 @@ namespace RSGMSales\Connector;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use RSGMSales\Connector\Dto\UserFeedbackData;
+use RSGMSales\Connector\Dto\CreateReviewData;
 use RSGMSales\Connector\Exceptions\MissingTokenException;
-use RSGMSales\Connector\Dto\OrderData;
+use RSGMSales\Connector\Dto\CreateOrderData;
 use RSGMSales\Connector\Dto\UserPreferencesData;
 use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
@@ -14,7 +14,7 @@ use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
 class UserApi implements UserApiInterface
 {
-    public function createFeedback(UserFeedbackData $feedbackData): BaseApiResponse
+    public function createReview(CreateReviewData $feedbackData): BaseApiResponse
     {
         return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.feedback.create'), [
             'json' => $feedbackData
@@ -72,7 +72,7 @@ class UserApi implements UserApiInterface
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function createOrder(OrderData $orderData): BaseApiResponse {
+    public function createOrder(CreateOrderData $orderData): BaseApiResponse {
         return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.orders.create'), [
             'json' => $orderData
         ]));

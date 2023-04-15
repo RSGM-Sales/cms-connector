@@ -2,7 +2,7 @@
 
 namespace RSGMSales\Connector\Dto;
 
-class UserFeedbackData
+class CreateReviewData
 {
     public string $text;
     public int $rating;
@@ -13,7 +13,7 @@ class UserFeedbackData
         $this->rating = $rating;
     }
 
-    public static function create(string $text, int $rating): UserFeedbackData {
-        return new UserFeedbackData($text, $rating);
+    public static function create(string $text, int $rating): CreateReviewData {
+        return new CreateReviewData($text, $rating);
     }
 }

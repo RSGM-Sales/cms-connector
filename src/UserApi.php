@@ -20,6 +20,7 @@ class UserApi implements UserApiInterface
             'json' => $feedbackData
         ]));
     }
+
     private function getClient(): Client {
         // I'm choosing to create a new client here on every request because I'm not sure when the user api token is being set in the session
         $token = session('user-api-token');
@@ -63,7 +64,7 @@ class UserApi implements UserApiInterface
         ]));
 
         if($response->statusCode === 200) {
-            session(['user-api-token' => $response->body['token']]);
+            session(['user-api-token' => $response->user()->token()]);
         }
 
         return $response;

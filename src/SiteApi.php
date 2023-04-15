@@ -55,7 +55,7 @@ class SiteApi implements SiteApiInterface
         ]));
 
         if($response->statusCode === 200) {
-            session(['user-api-token' => $response->body['token']]);
+            session(['user-api-token' => $response->user()->token()]);
         }
 
         return $response;
@@ -78,7 +78,7 @@ class SiteApi implements SiteApiInterface
         ]));
 
         if($response->statusCode === 200) {
-            session(['user-api-token' => $response->body['token']]);
+            session(['user-api-token' => $response->user()->token()]);
         }
 
         return $response;

@@ -14,7 +14,7 @@ interface SiteApiInterface
     public function getGames(): GameApiResponse;
     public function getCurrencies(): CurrencyApiResponse;
     public function getPaymentMethods(): PaymentOptionApiResponse;
-    public function getReviews(): ReviewApiResponse;
+    public function getReviews(int $page = 0): ReviewApiResponse;
     public function login(string $email, string $password): LoginApiResponse;
     public function logout(): void;
     public function register(string $email, string $password, string $firstName = null, string $lastName = null): LoginApiResponse;

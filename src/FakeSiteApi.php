@@ -133,7 +133,7 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function getReviews(): ReviewApiResponse
+    public function getReviews(int $page = 0): ReviewApiResponse
     {
         $data = [];
         for ($i = 0; $i < 6; $i++) {
@@ -147,19 +147,27 @@ class FakeSiteApi implements SiteApiInterface
             ];
         }
 
-        return new ReviewApiResponse(200, "", (object)[
+        return new ReviewApiResponse(0, 0,200, "", (object)[
             "data" => $data
         ]);
     }
 
-    public function login(string $username, string $password): LoginApiResponse
+    public function login(string $email, string $password): LoginApiResponse
     {
         $token = fake()->uuid();
         session(['user-api-token' => $token]);
 
-        return new LoginApiResponse(200, '', [
-            "username" => fake()->name(),
-            "token" => $token
+        return new LoginApiResponse(200, '', (object)[
+            "data" => (object) [
+                "type" => "user",
+                "attributes" => (object) [
+                    "username" => fake()->email(),
+                    "token" => $token,
+                    "firstName" => fake()->firstName(),
+                    "lastName" => fake()->lastName(),
+                    "marketingOptIn" => fake()->boolean()
+                ]
+            ]
         ]);
     }
 
@@ -168,14 +176,22 @@ class FakeSiteApi implements SiteApiInterface
         session(['user-api-token' => null]);
     }
 
-    public function register(string $username, string $password, string $name): LoginApiResponse
+    public function register(string $email, string $password, string $firstName = null, string $lastName = null): LoginApiResponse
     {
         $token = fake()->uuid();
         session(['user-api-token' => $token]);
 
-        return new LoginApiResponse(200, '', [
-            "username" => $name,
-            "token" => $token
+        return new LoginApiResponse(200, '', (object)[
+            "data" => (object) [
+                "type" => "user",
+                "attributes" => (object) [
+                    "username" => fake()->email(),
+                    "token" => $token,
+                    "firstName" => fake()->firstName(),
+                    "lastName" => fake()->lastName(),
+                    "marketingOptIn" => fake()->boolean()
+                ]
+            ]
         ]);
     }
 }

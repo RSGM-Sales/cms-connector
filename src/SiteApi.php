@@ -42,15 +42,15 @@ class SiteApi implements SiteApiInterface
         return PaymentOptionApiResponse::create($this->client->get(config('cms.endpoints.site.paymentMethods')));
     }
 
-    public function getReviews(): ReviewApiResponse {
+    public function getReviews(int $page = 0): ReviewApiResponse {
         return ReviewApiResponse::create($this->client->get(config('cms.endpoints.site.reviews')));
     }
 
-    public function login($username, $password): LoginApiResponse {
+    public function login($email, $password): LoginApiResponse {
         $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.login'), [
             'json' => [
-                'username' => $username,
-                'password' => bcrypt($password)
+                'username' => $email,
+                'password' => $password
             ]
         ]));
 
@@ -66,13 +66,14 @@ class SiteApi implements SiteApiInterface
         session(['user-api-token' => null]);
     }
 
-    public function register(string $username, string $password, string $name): LoginApiResponse
+    public function register(string $email, string $password, string $firstName = null, string $lastName = null): LoginApiResponse
     {
         $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.register'), [
             'json' => [
-                'username' => $username,
-                'password' => bcrypt($password),
-                'name' => $name
+                'username' => $email,
+                'password' => $password,
+                'firstName' => $firstName,
+                'lastName' => $lastName
             ]
         ]));
 

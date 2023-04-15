@@ -81,7 +81,7 @@ class UserApi implements UserApiInterface
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function getOrderHistory(): OrderHistoryApiResponse {
+    public function getOrderHistory(int $page = null): OrderHistoryApiResponse {
         return OrderHistoryApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.history')));
     }
 
@@ -93,7 +93,4 @@ class UserApi implements UserApiInterface
             'json' => $profileData
         ])));
     }
-
-
-
 }

@@ -5,19 +5,16 @@ namespace RSGMSales\Connector\Responses;
 use GuzzleHttp\Psr7\Response;
 use RSGMSales\Connector\Dto\Order;
 
-class OrderHistoryApiResponse extends BaseApiResponse
+class OrderHistoryApiResponse extends BaseApiPagedResponse
 {
-    public int $currentpage;
-    public int $totalPages;
-
-    public function __construct(int $statusCode = 200, string $reasonPhrase = "", mixed $body = null)
+    public function __construct(int $currentPage, int $totalPages, int $statusCode = 200, string $reasonPhrase = "", mixed $body = null)
     {
-        parent::__construct($statusCode, $reasonPhrase, $body);
+        parent::__construct($currentPage, $totalPages, $statusCode, $reasonPhrase, $body);
     }
 
     public static function create(Response $response): OrderHistoryApiResponse
     {
-        $instance = new OrderHistoryApiResponse($response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
+        $instance = new OrderHistoryApiResponse(0, 0, $response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
         $instance->response = $response;
         return $instance;
     }

@@ -15,6 +15,7 @@ class FakeUserApi implements UserApiInterface
     {
         return new BaseApiResponse();
     }
+
     public function requestNewPassword(string $redirectUrl): BaseApiResponse
     {
         return new BaseApiResponse();
@@ -25,9 +26,17 @@ class FakeUserApi implements UserApiInterface
         $token = fake()->uuid();
         session(['user-api-token' => $token]);
 
-        return new LoginApiResponse(200, '', [
-            "username" => fake()->name(),
-            "token" => $token
+        return new LoginApiResponse(200, '', (object)[
+            "data" => (object) [
+                    "type" => "user",
+                    "attributes" => (object) [
+                    "username" => fake()->email(),
+                    "token" => $token,
+                    "firstName" => fake()->firstName(),
+                    "lastName" => fake()->lastName(),
+                    "marketingOptIn" => fake()->boolean()
+                ]
+            ]
         ]);
     }
 
@@ -36,7 +45,7 @@ class FakeUserApi implements UserApiInterface
         return new BaseApiResponse();
     }
 
-    public function getOrderHistory(): OrderHistoryApiResponse
+    public function getOrderHistory(int $page = 0): OrderHistoryApiResponse
     {
         $data = [];
 
@@ -55,7 +64,7 @@ class FakeUserApi implements UserApiInterface
             ];
         }
 
-        return new OrderHistoryApiResponse(200, "", (object)[
+        return new OrderHistoryApiResponse(0,0,200, "", (object)[
             'data' => $data
         ]);
     }

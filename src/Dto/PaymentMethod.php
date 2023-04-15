@@ -27,7 +27,6 @@ class PaymentMethod extends BaseApiModel
         $items = [];
 
         foreach ($data as $item) {
-            if($item->type !== "paymentMethod") { continue; }
             $items[] = PaymentMethod::create($item);
         }
 

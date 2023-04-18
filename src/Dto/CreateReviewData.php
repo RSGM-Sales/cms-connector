@@ -12,6 +12,7 @@ class CreateReviewData
     {
         $this->text = $text;
         $this->rating = $rating;
+        $this->nickname = $nickname;
     }
 
     public static function create(string $text, int $rating, string $nickname): CreateReviewData {

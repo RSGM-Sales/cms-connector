@@ -13,7 +13,6 @@ return [
             'reviews' => '/api/reviews',
         ],
         'user' => [
-            'changeEmail' => '/api/users/change-email',
             'feedback' => [
                 'create' => '/api/feedback'
             ],

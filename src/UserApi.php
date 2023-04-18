@@ -40,8 +40,6 @@ class UserApi implements UserApiInterface
         ]);
     }
 
-
-
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */

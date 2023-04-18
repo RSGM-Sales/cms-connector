@@ -6,14 +6,15 @@ class CreateReviewData
 {
     public string $text;
     public int $rating;
+    public string $nickname;
 
-    public function __construct(string $text, int $rating)
+    public function __construct(string $text, int $rating, string $nickname)
     {
         $this->text = $text;
         $this->rating = $rating;
     }
 
-    public static function create(string $text, int $rating): CreateReviewData {
-        return new CreateReviewData($text, $rating);
+    public static function create(string $text, int $rating, string $nickname): CreateReviewData {
+        return new CreateReviewData($text, $rating, $nickname);
     }
 }

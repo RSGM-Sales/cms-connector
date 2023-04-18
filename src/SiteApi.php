@@ -92,9 +92,9 @@ class SiteApi implements SiteApiInterface
      */
     public function setNewPassword(string $email, string $password): LoginApiResponse
     {
-        $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.user.changePassword'), [
+        $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.changePassword'), [
             'json' => [
-                'email' => $email,
+                'username' => $email,
                 'password' => $password
             ]
         ]));
@@ -110,7 +110,7 @@ class SiteApi implements SiteApiInterface
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
     public function requestNewPassword(string $email, string $redirectUrl): BaseApiResponse {
-        return BaseApiResponse::create($this->client->get(config('cms.endpoints.user.changePasswordRequest'), [
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.requestNewPassword'), [
             'query' => [
                 'username' => $email,
                 'redirectUrl' => $redirectUrl

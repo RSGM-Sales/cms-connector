@@ -18,4 +18,6 @@ interface SiteApiInterface
     public function login(string $email, string $password): LoginApiResponse;
     public function logout(): void;
     public function register(string $email, string $password, string $firstName = null, string $lastName = null): LoginApiResponse;
+    public function requestNewPassword(string $email, string $redirectUrl): BaseApiResponse;
+    public function setNewPassword(string $email, string $password): LoginApiResponse;
 }

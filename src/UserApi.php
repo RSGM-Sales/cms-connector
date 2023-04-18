@@ -40,35 +40,7 @@ class UserApi implements UserApiInterface
         ]);
     }
 
-    /**
-     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
-     */
-    public function requestNewPassword(string $redirectUrl): BaseApiResponse {
-        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.changePasswordRequest'), [
-            'query' => [
-                'redirectUrl' => $redirectUrl
-            ]
-        ]));
-    }
 
-    /**
-     * @throws GuzzleException
-     * @throws MissingTokenException
-     */
-    public function setNewPassword(string $password): LoginApiResponse
-    {
-        $response = LoginApiResponse::create($this->getClient()->post(config('cms.endpoints.user.changePassword'), [
-            'json' => [
-                'password' => $password
-            ]
-        ]));
-
-        if($response->statusCode === 200) {
-            session(['user-api-token' => $response->user()->token()]);
-        }
-
-        return $response;
-    }
 
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException

@@ -3,6 +3,8 @@
 namespace RSGMSales\Connector;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
+use RSGMSales\Connector\Exceptions\MissingTokenException;
 use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\CurrencyApiResponse;
 use RSGMSales\Connector\Responses\GameApiResponse;
@@ -83,4 +85,38 @@ class SiteApi implements SiteApiInterface
 
         return $response;
     }
+
+    /**
+     * @throws GuzzleException
+     * @throws MissingTokenException
+     */
+    public function setNewPassword(string $email, string $password): LoginApiResponse
+    {
+        $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.user.changePassword'), [
+            'json' => [
+                'email' => $email,
+                'password' => $password
+            ]
+        ]));
+
+        if($response->statusCode === 200) {
+            session(['user-api-token' => $response->user()->token()]);
+        }
+
+        return $response;
+    }
+
+    /**
+     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
+     */
+    public function requestNewPassword(string $email, string $redirectUrl): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.user.changePasswordRequest'), [
+            'query' => [
+                'username' => $email,
+                'redirectUrl' => $redirectUrl
+            ]
+        ]));
+    }
+
+
 }

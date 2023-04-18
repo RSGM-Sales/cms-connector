@@ -14,7 +14,5 @@ interface UserApiInterface
     public function createReview(CreateReviewData $feedbackData): BaseApiResponse;
     public function createOrder(CreateOrderData $orderData): BaseApiResponse;
     public function getOrderHistory(int $page = 0): OrderHistoryApiResponse;
-    public function requestNewPassword(string $redirectUrl): BaseApiResponse;
-    public function setNewPassword(string $password): LoginApiResponse;
     public function updateProfile(UserPreferencesData $profileData): BaseApiResponse;
 }

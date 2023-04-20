@@ -171,11 +171,6 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function logout(): void
-    {
-        session(['user-api-token' => null]);
-    }
-
     public function register(string $email, string $password, string $firstName = null, string $lastName = null): LoginApiResponse
     {
         $token = fake()->uuid();

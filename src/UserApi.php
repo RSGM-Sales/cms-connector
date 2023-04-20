@@ -16,7 +16,7 @@ class UserApi implements UserApiInterface
 {
     public function createReview(CreateReviewData $feedbackData): BaseApiResponse
     {
-        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.feedback.create'), [
+        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.reviews.create'), [
             'json' => $feedbackData
         ]));
     }
@@ -54,6 +54,18 @@ class UserApi implements UserApiInterface
      */
     public function getOrderHistory(int $page = null): OrderHistoryApiResponse {
         return OrderHistoryApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.history')));
+    }
+
+    public function logout(): BaseApiResponse
+    {
+        $response = BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.logout')));
+
+        if($response->statusCode === 200)
+        {
+            session(['user-api-token' => null]);
+        }
+
+        return $response;
     }
 
     /**

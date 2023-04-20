@@ -15,12 +15,10 @@ class FakeUserApi implements UserApiInterface
     {
         return new BaseApiResponse();
     }
-
     public function createOrder(CreateOrderData $orderData): BaseApiResponse
     {
         return new BaseApiResponse();
     }
-
     public function getOrderHistory(int $page = 0): OrderHistoryApiResponse
     {
         $data = [];
@@ -44,7 +42,11 @@ class FakeUserApi implements UserApiInterface
             'data' => $data
         ]);
     }
-
+    public function logout(): BaseApiResponse
+    {
+        session(['user-api-token' => null]);
+        return new BaseApiResponse();
+    }
     public function updateProfile(UserPreferencesData $profileData): BaseApiResponse
     {
         return new BaseApiResponse();

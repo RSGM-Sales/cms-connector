@@ -9,18 +9,19 @@ return [
             'login' => '/api/users/login',
             'paymentMethods' => '/api/payment-providers',
             'register' => '/api/users/register',
-            'requestNewPassword' => '/api/users/request-new-passwordt',
+            'requestNewPassword' => '/api/users/request-new-password',
             'reviews' => '/api/reviews',
         ],
         'user' => [
-            'feedback' => [
-                'create' => '/api/feedback'
-            ],
+            'logout' => '/api/users/logout',
             'orders' => [
                 'create' => '/api/orders',
                 'history' => '/api/users/orders'
             ],
-            'updateProfile' => '/api/users/profile',
+            'reviews' => [
+                'create' => '/api/reviews'
+            ],
+            'updateProfile' => '/api/users/preferences',
         ]
     ]
 ];

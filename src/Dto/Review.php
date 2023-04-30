@@ -22,7 +22,7 @@ class Review extends BaseApiModel
 
     static function Create(mixed $data): Review
     {
-        return new Review($data->id, $data->attributes->name, $data->attributes->text);
+        return new Review($data->id, $data->attributes->nickname, $data->attributes->text);
     }
 
     static function Deserialize(mixed $data): array

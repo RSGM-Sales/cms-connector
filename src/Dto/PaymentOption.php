@@ -7,9 +7,9 @@ class PaymentOption extends BaseApiModel
     public int $id;
     public PaymentMethod $paymentMethod;
     public PaymentProvider $paymentProvider;
-    public float $fee;
+    public ?float $fee;
 
-    public function __construct(int $id, PaymentMethod $paymentMethod, PaymentProvider $paymentProvider, $fee = 0)
+    public function __construct(int $id, PaymentMethod $paymentMethod, PaymentProvider $paymentProvider, ?float $fee = 0)
     {
         $this->id = $id;
         $this->paymentMethod = $paymentMethod;

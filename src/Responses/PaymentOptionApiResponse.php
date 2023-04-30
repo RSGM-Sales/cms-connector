@@ -34,7 +34,7 @@ class PaymentOptionApiResponse extends BaseApiResponse
             $methodFound = false;
 
             $currentPaymentOption = (object)[
-                'name' =>$option->paymentProvider->name, // TODO: Name moet op niets trekken
+                'name' =>$option->paymentProvider->name,
                 'fee' =>$option->fee
             ];
 

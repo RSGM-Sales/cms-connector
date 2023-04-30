@@ -7,8 +7,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class ApiUser extends Authenticatable
 {
     public string $email;
-    public string $firstName;
-    public string $lastName;
+    public ?string $firstName;
+    public ?string $lastName;
     public bool $marketingOptIn;
     private string $token;
 

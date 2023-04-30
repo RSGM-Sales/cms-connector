@@ -26,7 +26,7 @@ class Game extends BaseApiModel
 
     static function Create(mixed $data): Game
     {
-        return new Game($data->id, $data->attributes->name, Product::Deserialize($data->relationships));
+        return new Game($data->id, $data->attributes->name, Product::Deserialize($data->relationships->products));
     }
 
     /**

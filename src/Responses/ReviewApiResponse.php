@@ -16,6 +16,8 @@ class ReviewApiResponse extends  BaseApiPagedResponse
     {
         $instance = new ReviewApiResponse(0, 0, $response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
         $instance->response = $response;
+        $instance->currentPage = $instance->body->meta->current_page;
+        $instance->totalPages = $instance->body->meta->last_page;
         return $instance;
     }
 

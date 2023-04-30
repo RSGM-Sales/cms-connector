@@ -28,9 +28,10 @@ class Game extends BaseApiModel
     {
         $products = [];
 
-        if(property_exists($data->relationships, 'products')) {
+        try {
             $products = Product::Deserialize($data->relationships->products);
         }
+        catch(\Exception $e) { /* This will fail when there are no products for the game */ }
 
         return new Game($data->id, $data->attributes->name, $products);
     }

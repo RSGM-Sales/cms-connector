@@ -10,6 +10,7 @@ class Order extends BaseApiModel
     public float $total;
     public string $status;
     public Currency $currency;
+    public Product $product;
 
     public function __construct(int $id, string $date, float $amount, float $total, string $status, Currency $currency)
     {

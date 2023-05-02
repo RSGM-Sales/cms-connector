@@ -33,7 +33,8 @@ class FakeUserApi implements UserApiInterface
                     'status' => fake()->randomElement(['pending', 'delivered', 'failed'])
                 ],
                 'relationships' => (object)[
-                    'currency' => (object)[ "id" => 1, "attributes" => (object)["name" => "Euro", "code" => "EUR", "rate" => 1, "symbol" => "€"] ]
+                    'currency' => (object)[ "id" => 1, "attributes" => (object)["name" => "Euro", "code" => "EUR", "rate" => 1, "symbol" => "€"] ],
+                    'product' => (object)[ "id" => 1, "attributes" => (object)["name" => "RS3", "price" => fake()->randomFloat(2,1,5)] ]
                 ],
             ];
         }

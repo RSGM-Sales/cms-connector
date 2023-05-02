@@ -51,7 +51,7 @@ class SiteApi implements SiteApiInterface
     public function login($email, $password): LoginApiResponse {
         $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.login'), [
             'json' => [
-                'username' => $email,
+                'email' => $email,
                 'password' => $password
             ]
         ]));
@@ -67,7 +67,7 @@ class SiteApi implements SiteApiInterface
     {
         $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.register'), [
             'json' => [
-                'username' => $email,
+                'email' => $email,
                 'password' => $password,
                 'firstName' => $firstName,
                 'lastName' => $lastName

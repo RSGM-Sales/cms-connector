@@ -32,6 +32,6 @@ class ApiUser extends Authenticatable
     }
 
     public static function deserialize(mixed $data): ApiUser {
-        return ApiUser::create($data->attributes->username, $data->attributes->token, $data->attributes->marketingOptIn, $data->attributes->firstName, $data->attributes->lastName);
+        return ApiUser::create($data->attributes->email, $data->attributes->token, $data->attributes->marketingOptIn, $data->attributes->firstName, $data->attributes->lastName);
     }
 }

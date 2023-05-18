@@ -9,20 +9,20 @@ class Review extends BaseApiModel
 {
     public int $id;
     public string $name;
-    public string $text;
+    public string $content;
     public int $rating;
 
-    public function __construct(int $id, string $name, string $text, int $rating = 5)
+    public function __construct(int $id, string $name, string $content, int $rating = 5)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->text = $text;
+        $this->content = $content;
         $this->rating = $rating;
     }
 
     static function Create(mixed $data): Review
     {
-        return new Review($data->id, $data->attributes->nickname, $data->attributes->text);
+        return new Review($data->id, $data->attributes->nickname, $data->attributes->content);
     }
 
     static function Deserialize(mixed $data): array

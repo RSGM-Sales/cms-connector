@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'apiBaseUrl' => 'http://localhost:8001',
+    'apiBaseUrl' => env('CMS_API_BASE_URL'),
     'site' => [
-        'id' => 1,
-        'username' => 'username',
-        'password' => 'password'
+        'id' => env('CMS_API_SITE_ID', 1),
+        'username' => env('CMS_API_USERNAME', 'username'),
+        'password' => env('CMS_API_PASSWORD', 'password'),
     ],
 ];

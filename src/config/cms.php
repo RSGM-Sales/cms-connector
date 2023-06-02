@@ -7,7 +7,7 @@ return [
             'currencies' => '/api/currencies',
             'games' => '/api/games',
             'login' => '/api/users/login',
-            'paymentMethods' => '/api/payment-providers',
+            'paymentMethods' => '/api/payment-providers-payment-methods',
             'register' => '/api/users/register',
             'requestNewPassword' => '/api/users/request-new-password',
             'reviews' => '/api/reviews',

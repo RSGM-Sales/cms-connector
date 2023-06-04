@@ -12,7 +12,7 @@ use RSGMSales\Connector\Responses\LoginApiResponse;
 use RSGMSales\Connector\Responses\PaymentOptionApiResponse;
 use RSGMSales\Connector\Responses\ReviewApiResponse;
 
-class SiteApi implements SiteApiInterface
+class SiteApi extends RSGMApi implements SiteApiInterface
 {
     private Client $client;
 
@@ -27,6 +27,7 @@ class SiteApi implements SiteApiInterface
             'headers' => [
                 'Authorization' => "Basic " . base64_encode("$username:$password"),
                 'Site-Id' => $site,
+                'User-IP' => $this->getUserIPAddress(),
                 'Content-Type' => 'application/json'
             ]
         ]);

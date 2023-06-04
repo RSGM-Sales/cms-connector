@@ -12,7 +12,7 @@ use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
 use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
-class UserApi implements UserApiInterface
+class UserApi extends RSGMApi implements UserApiInterface
 {
     /**
      * @throws MissingTokenException
@@ -31,6 +31,7 @@ class UserApi implements UserApiInterface
             'headers' => [
                 'Authorization' => "Bearer $token",
                 'Site-Id' => $site,
+                'User-IP' => $this->getUserIPAddress(),
                 'Content-Type' => 'application/json'
             ]
         ]);

@@ -3,6 +3,7 @@
 namespace RSGMSales\Connector\Responses;
 
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use RSGMSales\Connector\Dto\Review;
 
 class ReviewApiResponse extends  BaseApiPagedResponse
@@ -12,7 +13,7 @@ class ReviewApiResponse extends  BaseApiPagedResponse
         parent::__construct($currentPage, $totalPages, $statusCode, $reasonPhrase, $body);
     }
 
-    public static function create(Response $response): ReviewApiResponse
+    public static function create(ResponseInterface $response): ReviewApiResponse
     {
         $instance = new ReviewApiResponse(0, 0, $response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
         $instance->response = $response;

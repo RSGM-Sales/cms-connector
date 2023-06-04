@@ -3,6 +3,7 @@
 namespace RSGMSales\Connector\Responses;
 
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use RSGMSales\Connector\Dto\Game;
 
 class GameApiResponse extends BaseApiResponse
@@ -12,7 +13,7 @@ class GameApiResponse extends BaseApiResponse
         parent::__construct($statusCode, $reasonPhrase, $body);
     }
 
-    public static function create(Response $response): GameApiResponse
+    public static function create(ResponseInterface $response): GameApiResponse
     {
         $instance = new GameApiResponse($response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
         $instance->response = $response;

@@ -3,6 +3,7 @@
 namespace RSGMSales\Connector\Responses;
 
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use RSGMSales\Connector\Dto\PaymentOption;
 
 class PaymentOptionApiResponse extends BaseApiResponse
@@ -12,7 +13,7 @@ class PaymentOptionApiResponse extends BaseApiResponse
         parent::__construct($statusCode, $reasonPhrase, $body);
     }
 
-    public static function create(Response $response): PaymentOptionApiResponse
+    public static function create(ResponseInterface $response): PaymentOptionApiResponse
     {
         $instance = new PaymentOptionApiResponse($response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
         $instance->response = $response;

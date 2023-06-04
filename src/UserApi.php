@@ -14,13 +14,9 @@ use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
 class UserApi implements UserApiInterface
 {
-    public function createReview(CreateReviewData $feedbackData): BaseApiResponse
-    {
-        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.reviews.create'), [
-            'json' => $feedbackData
-        ]));
-    }
-
+    /**
+     * @throws MissingTokenException
+     */
     private function getClient(): Client {
         // I'm choosing to create a new client here on every request because I'm not sure when the user api token is being set in the session
         $token = session('user-api-token');
@@ -50,12 +46,27 @@ class UserApi implements UserApiInterface
     }
 
     /**
+     * @throws GuzzleException
+     * @throws MissingTokenException
+     */
+    public function createReview(CreateReviewData $feedbackData): BaseApiResponse
+    {
+        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.reviews.create'), [
+            'json' => $feedbackData
+        ]));
+    }
+
+    /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
     public function getOrderHistory(int $page = null): OrderHistoryApiResponse {
         return OrderHistoryApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.history')));
     }
 
+    /**
+     * @throws GuzzleException
+     * @throws MissingTokenException
+     */
     public function logout(): BaseApiResponse
     {
         $response = BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.logout')));

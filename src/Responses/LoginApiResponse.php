@@ -3,6 +3,7 @@
 namespace RSGMSales\Connector\Responses;
 
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use RSGMSales\Connector\Dto\ApiUser;
 
 class LoginApiResponse extends BaseApiResponse
@@ -12,7 +13,7 @@ class LoginApiResponse extends BaseApiResponse
         parent::__construct($statusCode, $reasonPhrase, $body);
     }
 
-    public static function create(Response $response): LoginApiResponse {
+    public static function create(ResponseInterface $response): LoginApiResponse {
         $instance = new LoginApiResponse($response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
         $instance->response = $response;
         return $instance;

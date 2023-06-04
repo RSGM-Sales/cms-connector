@@ -32,22 +32,37 @@ class SiteApi implements SiteApiInterface
         ]);
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function getGames(): GameApiResponse {
         return GameApiResponse::create($this->client->get(config('cms.endpoints.site.games')));
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function getCurrencies(): CurrencyApiResponse {
         return CurrencyApiResponse::create($this->client->get(config('cms.endpoints.site.currencies')));
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function getPaymentMethods(): PaymentOptionApiResponse {
         return PaymentOptionApiResponse::create($this->client->get(config('cms.endpoints.site.paymentMethods')));
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function getReviews(int $page = 0): ReviewApiResponse {
         return ReviewApiResponse::create($this->client->get(config('cms.endpoints.site.reviews')));
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function login($email, $password): LoginApiResponse {
         $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.login'), [
             'json' => [
@@ -63,6 +78,9 @@ class SiteApi implements SiteApiInterface
         return $response;
     }
 
+    /**
+     * @throws GuzzleException
+     */
     public function register(string $email, string $password, string $firstName = null, string $lastName = null): LoginApiResponse
     {
         $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.register'), [

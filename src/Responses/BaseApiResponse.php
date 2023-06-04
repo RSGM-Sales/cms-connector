@@ -3,6 +3,7 @@
 namespace RSGMSales\Connector\Responses;
 
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @property array $body
@@ -11,7 +12,7 @@ use GuzzleHttp\Psr7\Response;
  */
 class BaseApiResponse
 {
-    public Response $response;
+    public ResponseInterface $response;
 
     public mixed $body;
     public int $statusCode;
@@ -24,7 +25,7 @@ class BaseApiResponse
         $this->body = $body;
     }
 
-    public static function create(Response $response): BaseApiResponse {
+    public static function create(ResponseInterface $response): BaseApiResponse {
         $instance = new BaseApiResponse($response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
         $instance->response = $response;
         return $instance;

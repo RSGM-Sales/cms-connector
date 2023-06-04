@@ -3,6 +3,7 @@
 namespace RSGMSales\Connector\Responses;
 
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use RSGMSales\Connector\Dto\Order;
 
 class OrderHistoryApiResponse extends BaseApiPagedResponse
@@ -12,7 +13,7 @@ class OrderHistoryApiResponse extends BaseApiPagedResponse
         parent::__construct($currentPage, $totalPages, $statusCode, $reasonPhrase, $body);
     }
 
-    public static function create(Response $response): OrderHistoryApiResponse
+    public static function create(ResponseInterface $response): OrderHistoryApiResponse
     {
         $instance = new OrderHistoryApiResponse(0, 0, $response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
         $instance->response = $response;

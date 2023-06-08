@@ -18,16 +18,16 @@ class CreateOrderData
      * @var int
      */
     public int $currencyId;
-    public string $runescapeName;
+    public string $inGameName;
     public string $coupon;
     public int $paymentMethodId;
 
-    public function __construct(int $productId, float $amount, int $currencyId, string $runescapeName, int $paymentMethodId, string $coupon = '')
+    public function __construct(int $productId, float $amount, int $currencyId, string $inGameName, int $paymentMethodId, string $coupon = '')
     {
         $this->productId = $productId;
         $this->amount = $amount;
         $this->currencyId = $currencyId;
-        $this->runescapeName = $runescapeName;
+        $this->inGameName = $inGameName;
         $this->coupon = $coupon;
         $this->paymentMethodId = $paymentMethodId;
     }

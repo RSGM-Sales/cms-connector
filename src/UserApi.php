@@ -84,8 +84,14 @@ class UserApi extends RSGMApi implements UserApiInterface
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
     public function updateProfile(UserPreferencesData $profileData): BaseApiResponse {
-        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.updateProfile', [
+        $response = LoginApiResponse::create($this->getClient()->post(config('cms.endpoints.user.updateProfile'), [
             'json' => $profileData
-        ])));
+        ]));
+
+        if($response->statusCode === 200) {
+            session(['user-api-token' => $response->user()->token()]);
+        }
+
+        return $response;
     }
 }

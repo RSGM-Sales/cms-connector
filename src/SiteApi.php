@@ -93,7 +93,7 @@ class SiteApi extends RSGMApi implements SiteApiInterface
             ]
         ]));
 
-        if($response->statusCode === 200) {
+        if($response->statusCode === 201) {
             session(['user-api-token' => $response->user()->token()]);
         }
 
@@ -108,7 +108,7 @@ class SiteApi extends RSGMApi implements SiteApiInterface
     {
         $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.changePassword'), [
             'json' => [
-                'username' => $email,
+                'email' => $email,
                 'password' => $password
             ]
         ]));
@@ -126,7 +126,7 @@ class SiteApi extends RSGMApi implements SiteApiInterface
     public function requestNewPassword(string $email, string $redirectUrl): BaseApiResponse {
         return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.requestNewPassword'), [
             'query' => [
-                'username' => $email,
+                'email' => $email,
                 'redirectUrl' => $redirectUrl
             ]
         ]));

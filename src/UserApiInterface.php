@@ -15,5 +15,5 @@ interface UserApiInterface
     public function createOrder(CreateOrderData $orderData): BaseApiResponse;
     public function getOrderHistory(int $page = 0): OrderHistoryApiResponse;
     public function logout(): BaseApiResponse;
-    public function updateProfile(UserPreferencesData $profileData): BaseApiResponse;
+    public function updateProfile(UserPreferencesData $profileData): LoginApiResponse;
 }

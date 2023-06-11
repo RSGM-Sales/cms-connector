@@ -57,8 +57,22 @@ class FakeUserApi implements UserApiInterface
         return new BaseApiResponse();
     }
 
-    public function updateProfile(UserPreferencesData $profileData): BaseApiResponse
+    public function updateProfile(UserPreferencesData $profileData): LoginApiResponse
     {
-        return new BaseApiResponse();
+        $token = fake()->uuid();
+        session(['user-api-token' => $token]);
+
+        return new LoginApiResponse(200, '', (object)[
+            "data" => (object) [
+                "type" => "user",
+                "attributes" => (object) [
+                    "email" => $profileData->email ?? fake()->email(),
+                    "token" => $token,
+                    "firstName" => fake()->firstName(),
+                    "lastName" => fake()->lastName(),
+                    "marketingOptIn" => $profileData->marketingOptIn ?? fake()->boolean()
+                ]
+            ]
+        ]);
     }
 }

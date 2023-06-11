@@ -4,27 +4,56 @@ namespace RSGMSales\Connector\Dto;
 
 class Order extends BaseApiModel
 {
-    public int $id;
-    public string $date;
     public float $amount;
-    public float $total;
     public string $status;
-    public Currency $currency;
-    public Product $product;
+    public float $orderNumber;
+    public string $currencyIsoCode;
+    public string $currencyName;
+    public string $providerName;
+    public string $providerFee;
+    public string $couponCode;
+    public string $couponAmount;
+    public string $createdAt;
 
-    public function __construct(int $id, string $date, float $amount, float $total, string $status, Currency $currency)
+    public function __construct(
+        float  $amount,
+        string $status,
+        float  $orderNumber,
+        string  $currencyIsoCode,
+        string $currencyName,
+        string $providerName,
+        string $providerFee,
+        string $couponCode,
+        string $couponAmount,
+        string $createdAt,
+    )
     {
-        $this->id = $id;
-        $this->date = $date;
         $this->amount = $amount;
-        $this->total = $total;
         $this->status = $status;
-        $this->currency = $currency;
+        $this->orderNumber = $orderNumber;
+        $this->currencyIsoCode = $currencyIsoCode;
+        $this->currencyName = $currencyName;
+        $this->providerName = $providerName;
+        $this->providerFee = $providerFee;
+        $this->couponCode = $couponCode;
+        $this->couponAmount = $couponAmount;
+        $this->createdAt = $createdAt;
     }
 
     static function Create(mixed $data): Order
     {
-        return new Order($data->id, $data->attributes->date, $data->attributes->amount, $data->attributes->total, $data->attributes->status, Currency::Create($data->relationships->currency));
+        return new Order(
+            $data->attributes->amount,
+            $data->attributes->status,
+            $data->attributes->orderNumber,
+            $data->attributes->currencyIsoCode,
+            $data->attributes->currencyName,
+            $data->attributes->providerName,
+            $data->attributes->providerFee,
+            $data->attributes->couponCode,
+            $data->attributes->couponAmount,
+            $data->attributes->createdAt,
+        );
     }
 
     /**

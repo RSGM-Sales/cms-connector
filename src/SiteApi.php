@@ -124,7 +124,7 @@ class SiteApi extends RSGMApi implements SiteApiInterface
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
     public function requestNewPassword(string $email, string $redirectUrl): BaseApiResponse {
-        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.requestNewPassword'), [
+        return BaseApiResponse::create($this->client->post(config('cms.endpoints.site.requestNewPassword'), [
             'query' => [
                 'email' => $email,
                 'redirectUrl' => $redirectUrl

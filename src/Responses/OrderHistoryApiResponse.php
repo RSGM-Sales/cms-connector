@@ -17,8 +17,8 @@ class OrderHistoryApiResponse extends BaseApiPagedResponse
     {
         $instance = new OrderHistoryApiResponse(0, 0, $response->getStatusCode(), $response->getReasonPhrase(), json_decode($response->getBody()->getContents()));
         $instance->response = $response;
-        $instance->currentPage = $instance->body->meta->current_page;
-        $instance->totalPages = $instance->body->meta->last_page;
+//        $instance->currentPage = $instance->body->meta->current_page;
+//        $instance->totalPages = $instance->body->meta->last_page;
         return $instance;
     }
 

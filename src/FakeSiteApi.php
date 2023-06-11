@@ -171,23 +171,9 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function register(string $email, string $password, string $firstName = null, string $lastName = null): LoginApiResponse
+    public function register(string $email, string $password, string $firstName = null, string $lastName = null): BaseApiResponse
     {
-        $token = fake()->uuid();
-        session(['user-api-token' => $token]);
-
-        return new LoginApiResponse(200, '', (object)[
-            "data" => (object) [
-                "type" => "user",
-                "attributes" => (object) [
-                    "username" => fake()->email(),
-                    "token" => $token,
-                    "firstName" => fake()->firstName(),
-                    "lastName" => fake()->lastName(),
-                    "marketingOptIn" => fake()->boolean()
-                ]
-            ]
-        ]);
+        return new BaseApiResponse();
     }
 
     public function setNewPassword(string $email, string $password): LoginApiResponse

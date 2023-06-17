@@ -20,23 +20,25 @@ class FakeSiteApi implements SiteApiInterface
                     "attributes" => (object)[
                         "name" => "RuneScape"
                     ],
-                    "relationships" => [
-                        (object)[
-                            "id" => 1,
-                            "type" => "product",
-                            "attributes" => (object) [
-                                "name" => "OSRS",
-                                "pricePerUnit" => 0.25
-                            ]
-                        ],
-                        (object)[
-                            "id" => 2,
-                            "type" => "product",
-                            "attributes" => (object) [
-                                "name" => "RS3",
-                                "pricePerUnit" => 1.13
-                            ]
-                        ],
+                    "relationships" => (object)[
+                        "products" => [
+                            (object)[
+                                "id" => 1,
+                                "type" => "product",
+                                "attributes" => (object) [
+                                    "name" => "OSRS",
+                                    "pricePerUnit" => 0.25
+                                ]
+                            ],
+                            (object)[
+                                "id" => 2,
+                                "type" => "product",
+                                "attributes" => (object) [
+                                    "name" => "RS3",
+                                    "pricePerUnit" => 1.13
+                                ]
+                            ],
+                        ]
                     ]
                 ]
             ]

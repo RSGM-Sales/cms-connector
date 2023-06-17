@@ -138,13 +138,14 @@ class FakeSiteApi implements SiteApiInterface
     public function getReviews(int $page = 0): ReviewApiResponse
     {
         $data = [];
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $data[] = (object)[
                 "id" => $i,
                 "attributes" => (object)[
-                    "name" => fake()->name(),
-                    "rating" => 5,
-                    "text" => fake()->realText(fake()->numberBetween(50,400))
+                    "nickname" => fake()->name(),
+                    "rating" => fake()->numberBetween(1,5),
+                    "content" => fake()->realText(fake()->numberBetween(50,400)),
+                    "date" => fake()->dateTime()->format('Y-m-d H:i:s')
                 ]
             ];
         }

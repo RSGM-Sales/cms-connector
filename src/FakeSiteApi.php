@@ -11,6 +11,11 @@ use RSGMSales\Connector\Responses\ReviewApiResponse;
 
 class FakeSiteApi implements SiteApiInterface
 {
+    public function confirmEmail(string $email): BaseApiResponse
+    {
+        return new BaseApiResponse();
+    }
+
     public function getGames(): GameApiResponse {
         return new GameApiResponse(200, "", (object)[
             "data" => [
@@ -174,7 +179,7 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function register(string $email, string $password, string $firstName = null, string $lastName = null): BaseApiResponse
+    public function sendEmailConfirmationMail(string $email, string $emailConfirmationUrl): BaseApiResponse
     {
         return new BaseApiResponse();
     }
@@ -196,6 +201,11 @@ class FakeSiteApi implements SiteApiInterface
                 ]
             ]
         ]);
+    }
+
+    public function register(string $email, string $password, string $emailConfirmationUrl, string $firstName, string $lastName = null): BaseApiResponse
+    {
+        return new BaseApiResponse();
     }
 
     public function requestNewPassword(string $email, string $redirectUrl): BaseApiResponse {

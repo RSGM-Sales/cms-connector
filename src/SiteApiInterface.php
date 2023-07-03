@@ -16,7 +16,8 @@ interface SiteApiInterface
     public function getPaymentMethods(): PaymentOptionApiResponse;
     public function getReviews(int $page = 0): ReviewApiResponse;
     public function login(string $email, string $password): LoginApiResponse;
-    public function register(string $email, string $password, string $firstName = null, string $lastName = null): BaseApiResponse;
+    public function register(string $email, string $password, string $emailConfirmationUrl, string $firstName, string $lastName = null): BaseApiResponse;
     public function requestNewPassword(string $email, string $redirectUrl): BaseApiResponse;
+    public function sendEmailConfirmationMail(string $email, string $emailConfirmationUrl): BaseApiResponse;
     public function setNewPassword(string $email, string $password): LoginApiResponse;
 }

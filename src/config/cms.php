@@ -4,6 +4,7 @@ return [
     'endpoints' => [
         'site' => [
             'changePassword' => '/api/users/change-password',
+            'confirmEmail' => '/api/users/confirm-email',
             'currencies' => '/api/currencies',
             'games' => '/api/games',
             'login' => '/api/users/login',
@@ -11,6 +12,7 @@ return [
             'register' => '/api/users/register',
             'requestNewPassword' => '/api/users/request-new-password',
             'reviews' => '/api/reviews',
+            'sendEmailConfirmationMail' => '/api/users/send-email-confirmation-mail',
         ],
         'user' => [
             'logout' => '/api/users/logout',

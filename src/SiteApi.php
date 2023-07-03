@@ -36,6 +36,18 @@ class SiteApi extends RSGMApi implements SiteApiInterface
     /**
      * @throws GuzzleException
      */
+    public function confirmEmail(string $email): BaseApiResponse
+    {
+        return BaseApiResponse::create($this->client->post(config('cms.endpoints.site.confirmEmail'), [
+            'json' => [
+                'email' => $email,
+            ]
+        ]));
+    }
+
+    /**
+     * @throws GuzzleException
+     */
     public function getGames(): GameApiResponse {
         return GameApiResponse::create($this->client->get(config('cms.endpoints.site.games')));
     }
@@ -76,20 +88,19 @@ class SiteApi extends RSGMApi implements SiteApiInterface
             session(['user-api-token' => $response->user()->token()]);
         }
 
+        if($response->statusCode === 401 && $response->body === "The email address has not been confirmed yet") {
+            throw new EmailNotConfirmedException();
+        }
+
         return $response;
     }
 
-    /**
-     * @throws GuzzleException
-     */
-    public function register(string $email, string $password, string $firstName = null, string $lastName = null): BaseApiResponse
+    public function sendEmailConfirmationMail(string $email, string $emailConfirmationUrl): BaseApiResponse
     {
-        return BaseApiResponse::create($this->client->post(config('cms.endpoints.site.register'), [
+        return BaseApiResponse::create($this->client->post(config('cms.endpoints.site.sendEmailConfirmationMail'), [
             'json' => [
                 'email' => $email,
-                'password' => $password,
-                'firstName' => $firstName,
-                'lastName' => $lastName
+                'emailConfirmationUrl' => $emailConfirmationUrl,
             ]
         ]));
     }
@@ -112,6 +123,22 @@ class SiteApi extends RSGMApi implements SiteApiInterface
         }
 
         return $response;
+    }
+
+        /**
+         * @throws GuzzleException
+         */
+    public function register(string $email, string $password, string $emailConfirmationUrl, string $firstName, string $lastName = null): BaseApiResponse
+    {
+        return BaseApiResponse::create($this->client->post(config('cms.endpoints.site.register'), [
+            'json' => [
+                'email' => $email,
+                'password' => $password,
+                'firstName' => $firstName,
+                'lastName' => $lastName,
+                'emailConfirmationUrl' => $emailConfirmationUrl,
+            ]
+        ]));
     }
 
     /**

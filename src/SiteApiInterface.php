@@ -11,6 +11,7 @@ use RSGMSales\Connector\Responses\ReviewApiResponse;
 
 interface SiteApiInterface
 {
+    public function confirmEmail(string $email): BaseApiResponse;
     public function getGames(): GameApiResponse;
     public function getCurrencies(): CurrencyApiResponse;
     public function getPaymentMethods(): PaymentOptionApiResponse;

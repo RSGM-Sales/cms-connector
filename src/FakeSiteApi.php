@@ -2,6 +2,8 @@
 
 namespace RSGMSales\Connector;
 
+use RSGMSales\Connector\Contracts\SiteApiInterface;
+use RSGMSales\Connector\Responses\BaseApiPagedResponse;
 use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\CurrencyApiResponse;
 use RSGMSales\Connector\Responses\GameApiResponse;
@@ -16,8 +18,8 @@ class FakeSiteApi implements SiteApiInterface
         return new BaseApiResponse();
     }
 
-    public function getGames(): GameApiResponse {
-        return new GameApiResponse(200, "", (object)[
+    public function getGames(): BaseApiResponse {
+        return new BaseApiResponse(200, "", (object)[
             "data" => [
                 (object)[
                     "id" => 1,
@@ -50,9 +52,9 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function getCurrencies(): CurrencyApiResponse
+    public function getCurrencies(): BaseApiResponse
     {
-        return new CurrencyApiResponse(200, "", (object)[
+        return new BaseApiResponse(200, "", (object)[
             "data" => [
                 (object)[ "id" => 1, "attributes" => (object)["name" => "Euro", "code" => "EUR", "rate" => 1, "symbol" => "€"] ],
                 (object)[ "id" => 2, "attributes" => (object)["name" => "Dollar", "code" => "USD", "rate" => 0.90, "symbol" => "$" ] ],
@@ -60,9 +62,9 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function getPaymentMethods(): PaymentOptionApiResponse
+    public function getPaymentMethods(): BaseApiResponse
     {
-        return new PaymentOptionApiResponse(200, "", (object)[
+        return new BaseApiResponse(200, "", (object)[
             "data" => [
                 (object)[
                     "id" => 1,
@@ -140,7 +142,7 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function getReviews(int $page = 0): ReviewApiResponse
+    public function getReviews(int $page = 0): BaseApiResponse
     {
         $data = [];
         for ($i = 0; $i < 20; $i++) {
@@ -155,7 +157,7 @@ class FakeSiteApi implements SiteApiInterface
             ];
         }
 
-        return new ReviewApiResponse(0, 0,200, "", (object)[
+        return new BaseApiResponse(200, "", (object)[
             "data" => $data
         ]);
     }

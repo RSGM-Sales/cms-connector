@@ -2,12 +2,12 @@
 
 namespace RSGMSales\Connector;
 
+use RSGMSales\Connector\Contracts\UserApiInterface;
 use RSGMSales\Connector\Dto\CreateOrderData;
 use RSGMSales\Connector\Dto\CreateReviewData;
 use RSGMSales\Connector\Dto\UserPreferencesData;
 use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
-use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
 class FakeUserApi implements UserApiInterface
 {
@@ -21,7 +21,7 @@ class FakeUserApi implements UserApiInterface
         return new BaseApiResponse();
     }
 
-    public function getOrderHistory(int $page = 0): OrderHistoryApiResponse
+    public function getOrderHistory(int $page = 0): BaseApiResponse
     {
         $data = [];
 
@@ -46,7 +46,7 @@ class FakeUserApi implements UserApiInterface
             ];
         }
 
-        return new OrderHistoryApiResponse(0, 0, 200, "", (object)[
+        return new BaseApiResponse(200, "", (object)[
             'data' => $data
         ]);
     }

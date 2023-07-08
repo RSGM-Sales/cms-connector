@@ -4,13 +4,10 @@ namespace RSGMSales\Connector;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use RSGMSales\Connector\Contracts\SiteApiInterface;
 use RSGMSales\Connector\Exceptions\MissingTokenException;
 use RSGMSales\Connector\Responses\BaseApiResponse;
-use RSGMSales\Connector\Responses\CurrencyApiResponse;
-use RSGMSales\Connector\Responses\GameApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
-use RSGMSales\Connector\Responses\PaymentOptionApiResponse;
-use RSGMSales\Connector\Responses\ReviewApiResponse;
 
 class SiteApi extends RSGMApi implements SiteApiInterface
 {
@@ -48,29 +45,29 @@ class SiteApi extends RSGMApi implements SiteApiInterface
     /**
      * @throws GuzzleException
      */
-    public function getGames(): GameApiResponse {
-        return GameApiResponse::create($this->client->get(config('cms.endpoints.site.games')));
+    public function getGames(): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.games')));
     }
 
     /**
      * @throws GuzzleException
      */
-    public function getCurrencies(): CurrencyApiResponse {
-        return CurrencyApiResponse::create($this->client->get(config('cms.endpoints.site.currencies')));
+    public function getCurrencies(): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.currencies')));
     }
 
     /**
      * @throws GuzzleException
      */
-    public function getPaymentMethods(): PaymentOptionApiResponse {
-        return PaymentOptionApiResponse::create($this->client->get(config('cms.endpoints.site.paymentMethods')));
+    public function getPaymentMethods(): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.paymentMethods')));
     }
 
     /**
      * @throws GuzzleException
      */
-    public function getReviews(int $page = 0): ReviewApiResponse {
-        return ReviewApiResponse::create($this->client->get(config('cms.endpoints.site.reviews')));
+    public function getReviews(int $page = 0): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.reviews')));
     }
 
     /**

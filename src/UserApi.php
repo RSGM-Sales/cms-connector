@@ -4,13 +4,14 @@ namespace RSGMSales\Connector;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use RSGMSales\Connector\Dto\CreateReviewData;
-use RSGMSales\Connector\Exceptions\MissingTokenException;
+use RSGMSales\Connector\Contracts\UserApiInterface;
 use RSGMSales\Connector\Dto\CreateOrderData;
+use RSGMSales\Connector\Dto\CreateReviewData;
 use RSGMSales\Connector\Dto\UserPreferencesData;
+use RSGMSales\Connector\Exceptions\MissingTokenException;
+use RSGMSales\Connector\Responses\BaseApiPagedResponse;
 use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
-use RSGMSales\Connector\Responses\OrderHistoryApiResponse;
 
 class UserApi extends RSGMApi implements UserApiInterface
 {
@@ -60,8 +61,8 @@ class UserApi extends RSGMApi implements UserApiInterface
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function getOrderHistory(int $page = null): OrderHistoryApiResponse {
-        return OrderHistoryApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.history')));
+    public function getOrderHistory(int $page = null): BaseApiResponse {
+        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.history')));
     }
 
     /**

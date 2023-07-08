@@ -2,9 +2,8 @@
 
 namespace RSGMSales\Connector;
 
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Mail;
-use mysql_xdevapi\Result;
+use RSGMSales\Connector\Contracts\SiteApiInterface;
+use RSGMSales\Connector\Contracts\UserApiInterface;
 
 class Connector
 {

@@ -2,6 +2,8 @@
 
 namespace RSGMSales\Connector\Responses;
 
+use RSGMSales\Connector\Dto\ApiUser;
+
 class BaseApiPagedResponse extends BaseApiResponse
 {
 
@@ -14,5 +16,9 @@ class BaseApiPagedResponse extends BaseApiResponse
 
         $this->currentPage = $currentPage;
         $this->totalPages = $totalPages;
+    }
+
+    public static function deserialize(mixed $data): ApiUser {
+        return ApiUser::create($data->attributes->email, $data->attributes->token, $data->attributes->marketingOptIn, $data->attributes->firstName, $data->attributes->lastName);
     }
 }

@@ -13,7 +13,7 @@ use RSGMSales\Connector\Responses\ReviewApiResponse;
 
 class FakeSiteApi implements SiteApiInterface
 {
-    public function confirmEmail(string $email): BaseApiResponse
+    public function confirmEmail(mixed $data): BaseApiResponse
     {
         return new BaseApiResponse();
     }
@@ -162,7 +162,7 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function login(string $email, string $password): LoginApiResponse
+    public function login(mixed $data): LoginApiResponse
     {
         $token = fake()->uuid();
         session(['user-api-token' => $token]);
@@ -181,12 +181,12 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function sendEmailConfirmationMail(string $email, string $emailConfirmationUrl): BaseApiResponse
+    public function sendEmailConfirmationMail(mixed $data): BaseApiResponse
     {
         return new BaseApiResponse();
     }
 
-    public function setNewPassword(string $email, string $password): LoginApiResponse
+    public function setNewPassword(mixed $data): LoginApiResponse
     {
         $token = fake()->uuid();
         session(['user-api-token' => $token]);
@@ -205,12 +205,12 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function register(string $email, string $password, string $emailConfirmationUrl, string $firstName, string $lastName = null): BaseApiResponse
+    public function register(mixed $data): BaseApiResponse
     {
         return new BaseApiResponse();
     }
 
-    public function requestNewPassword(string $email, string $redirectUrl): BaseApiResponse {
+    public function requestNewPassword(mixed $data): BaseApiResponse {
         return new BaseApiResponse();
     }
 }

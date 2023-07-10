@@ -41,9 +41,9 @@ class UserApi extends RSGMApi implements UserApiInterface
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function createOrder(CreateOrderData $orderData): BaseApiResponse {
+    public function createOrder(mixed $data): BaseApiResponse {
         return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.orders.create'), [
-            'json' => $orderData
+            'json' => $data
         ]));
     }
 
@@ -51,10 +51,10 @@ class UserApi extends RSGMApi implements UserApiInterface
      * @throws GuzzleException
      * @throws MissingTokenException
      */
-    public function createReview(CreateReviewData $feedbackData): BaseApiResponse
+    public function createReview(mixed $data): BaseApiResponse
     {
         return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.reviews.create'), [
-            'json' => $feedbackData
+            'json' => $data
         ]));
     }
 
@@ -84,9 +84,9 @@ class UserApi extends RSGMApi implements UserApiInterface
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function updateProfile(UserPreferencesData $profileData): LoginApiResponse {
+    public function updateProfile(mixed $data): LoginApiResponse {
         $response = LoginApiResponse::create($this->getClient()->post(config('cms.endpoints.user.updateProfile'), [
-            'json' => $profileData
+            'json' => $data
         ]));
 
         if($response->statusCode === 200) {

@@ -33,12 +33,10 @@ class SiteApi extends RSGMApi implements SiteApiInterface
     /**
      * @throws GuzzleException
      */
-    public function confirmEmail(string $email): BaseApiResponse
+    public function confirmEmail(mixed $data): BaseApiResponse
     {
         return BaseApiResponse::create($this->client->post(config('cms.endpoints.site.confirmEmail'), [
-            'json' => [
-                'email' => $email,
-            ]
+            'json' => $data
         ]));
     }
 
@@ -73,12 +71,9 @@ class SiteApi extends RSGMApi implements SiteApiInterface
     /**
      * @throws GuzzleException
      */
-    public function login($email, $password): LoginApiResponse {
+    public function login(mixed $data): LoginApiResponse {
         $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.login'), [
-            'json' => [
-                'email' => $email,
-                'password' => $password
-            ]
+            'json' => $data
         ]));
 
         if($response->statusCode === 200) {
@@ -92,13 +87,10 @@ class SiteApi extends RSGMApi implements SiteApiInterface
         return $response;
     }
 
-    public function sendEmailConfirmationMail(string $email, string $emailConfirmationUrl): BaseApiResponse
+    public function sendEmailConfirmationMail(mixed $data): BaseApiResponse
     {
         return BaseApiResponse::create($this->client->post(config('cms.endpoints.site.sendEmailConfirmationMail'), [
-            'json' => [
-                'email' => $email,
-                'emailConfirmationUrl' => $emailConfirmationUrl,
-            ]
+            'json' => $data
         ]));
     }
 
@@ -106,13 +98,10 @@ class SiteApi extends RSGMApi implements SiteApiInterface
      * @throws GuzzleException
      * @throws MissingTokenException
      */
-    public function setNewPassword(string $email, string $password): LoginApiResponse
+    public function setNewPassword(mixed $data): LoginApiResponse
     {
         $response = LoginApiResponse::create($this->client->post(config('cms.endpoints.site.changePassword'), [
-            'json' => [
-                'email' => $email,
-                'password' => $password
-            ]
+            'json' => $data
         ]));
 
         if($response->statusCode === 200) {
@@ -125,28 +114,19 @@ class SiteApi extends RSGMApi implements SiteApiInterface
         /**
          * @throws GuzzleException
          */
-    public function register(string $email, string $password, string $emailConfirmationUrl, string $firstName, string $lastName = null): BaseApiResponse
+    public function register(mixed $data): BaseApiResponse
     {
         return BaseApiResponse::create($this->client->post(config('cms.endpoints.site.register'), [
-            'json' => [
-                'email' => $email,
-                'password' => $password,
-                'firstName' => $firstName,
-                'lastName' => $lastName,
-                'emailConfirmationUrl' => $emailConfirmationUrl,
-            ]
+            'json' => $data
         ]));
     }
 
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function requestNewPassword(string $email, string $redirectUrl): BaseApiResponse {
+    public function requestNewPassword(mixed $data): BaseApiResponse {
         return BaseApiResponse::create($this->client->post(config('cms.endpoints.site.requestNewPassword'), [
-            'query' => [
-                'email' => $email,
-                'redirectUrl' => $redirectUrl
-            ]
+            'query' => $data
         ]));
     }
 

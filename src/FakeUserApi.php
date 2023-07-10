@@ -11,12 +11,12 @@ use RSGMSales\Connector\Responses\LoginApiResponse;
 
 class FakeUserApi implements UserApiInterface
 {
-    public function createReview(CreateReviewData $feedbackData): BaseApiResponse
+    public function createReview(mixed $data): BaseApiResponse
     {
         return new BaseApiResponse();
     }
 
-    public function createOrder(CreateOrderData $orderData): BaseApiResponse
+    public function createOrder(mixed $data): BaseApiResponse
     {
         return new BaseApiResponse();
     }
@@ -57,7 +57,7 @@ class FakeUserApi implements UserApiInterface
         return new BaseApiResponse();
     }
 
-    public function updateProfile(UserPreferencesData $profileData): LoginApiResponse
+    public function updateProfile(mixed $data): LoginApiResponse
     {
         $token = fake()->uuid();
         session(['user-api-token' => $token]);

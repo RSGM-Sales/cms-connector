@@ -64,8 +64,10 @@ class SiteApi extends RSGMApi implements SiteApiInterface
     /**
      * @throws GuzzleException
      */
-    public function getReviews(int $page = 0): BaseApiResponse {
-        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.reviews')));
+    public function getReviews(mixed $data): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.reviews'), [
+            'json' => $data
+        ]));
     }
 
     /**

@@ -82,10 +82,6 @@ class SiteApi extends RSGMApi implements SiteApiInterface
             session(['user-api-token' => $response->user()->token()]);
         }
 
-        if($response->statusCode === 401 && $response->body === "The email address has not been confirmed yet") {
-            throw new EmailNotConfirmedException();
-        }
-
         return $response;
     }
 

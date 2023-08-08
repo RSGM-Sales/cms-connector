@@ -21,7 +21,7 @@ class FakeUserApi implements UserApiInterface
         return new BaseApiResponse();
     }
 
-    public function getOrderHistory(int $page = 0): BaseApiResponse
+    public function getOrderHistory(mixed $data): BaseApiResponse
     {
         $data = [];
 
@@ -105,7 +105,7 @@ class FakeUserApi implements UserApiInterface
         ]);
     }
 
-    public function getOrderProductHistory(int $page = 0): BaseApiResponse
+    public function getOrderProductHistory(mixed $data): BaseApiResponse
     {
         $data = [];
 

@@ -64,8 +64,10 @@ class SiteApi extends RSGMApi implements SiteApiInterface
     /**
      * @throws GuzzleException
      */
-    public function getReviews(int $page = 0): BaseApiResponse {
-        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.reviews')));
+    public function getReviews(mixed $data): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.reviews'), [
+            'json' => $data
+        ]));
     }
 
     /**
@@ -78,10 +80,6 @@ class SiteApi extends RSGMApi implements SiteApiInterface
 
         if($response->statusCode === 200) {
             session(['user-api-token' => $response->user()->token()]);
-        }
-
-        if($response->statusCode === 401 && $response->body === "The email address has not been confirmed yet") {
-            throw new EmailNotConfirmedException();
         }
 
         return $response;

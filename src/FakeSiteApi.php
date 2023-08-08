@@ -142,7 +142,7 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function getReviews(int $page = 0): BaseApiResponse
+    public function getReviews(mixed $data): BaseApiResponse
     {
         $data = [];
         for ($i = 0; $i < 20; $i++) {

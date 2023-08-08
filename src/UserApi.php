@@ -61,15 +61,19 @@ class UserApi extends RSGMApi implements UserApiInterface
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function getOrderHistory(int $page = null): BaseApiResponse {
-        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.history')));
+    public function getOrderHistory(mixed $data): BaseApiResponse {
+        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.history'), [
+            'json' => $data
+        ]));
     }
 
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function getOrderProductHistory(int $page = null): BaseApiResponse {
-        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.productHistory')));
+    public function getOrderProductHistory(mixed $data): BaseApiResponse {
+        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.productHistory'), [
+            'json' => $data
+        ]));
     }
 
     /**

@@ -18,7 +18,8 @@ return [
             'logout' => '/api/users/logout',
             'orders' => [
                 'create' => '/api/orders',
-                'history' => '/api/users/orders'
+                'history' => '/api/users/orders',
+                'productHistory' => '/api/users/orders/products',
             ],
             'reviews' => [
                 'create' => '/api/reviews'

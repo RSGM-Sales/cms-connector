@@ -66,6 +66,13 @@ class UserApi extends RSGMApi implements UserApiInterface
     }
 
     /**
+     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
+     */
+    public function getOrderProductHistory(int $page = null): BaseApiResponse {
+        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.productHistory')));
+    }
+
+    /**
      * @throws GuzzleException
      * @throws MissingTokenException
      */

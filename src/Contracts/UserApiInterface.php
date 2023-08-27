@@ -14,7 +14,7 @@ interface UserApiInterface
     public function createOrder(mixed $data): BaseApiResponse;
     public function getOrderHistory(mixed $data): BaseApiResponse;
     public function getOrderProductHistory(mixed $data): BaseApiResponse;
-    public function getOrderByOrderNumber(mixed $data): BaseApiResponse;
+    public function getOrderByOrderNumber(string $orderNumber, mixed $data): BaseApiResponse;
     public function logout(): BaseApiResponse;
     public function updateProfile(mixed $data): LoginApiResponse;
 }

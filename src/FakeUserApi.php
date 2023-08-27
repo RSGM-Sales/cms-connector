@@ -41,7 +41,7 @@ class FakeUserApi implements UserApiInterface
                         'attributes' => (object)[
                             'name' => fake()->text(10),
                             'slug' => fake()->slug(),
-                            'pricePerUnit' => fake()->randomFloat(2, 1, 10),
+                            'pricePerUnit' => fake()->randomFloat(2,1,10),
                         ],
                     ],
                     'order' => (object)[
@@ -59,7 +59,7 @@ class FakeUserApi implements UserApiInterface
                                 'name' => fake()->currencyCode(),
                                 'code' => fake()->currencyCode(),
                                 'symbol' => Currencies::getSymbol(fake()->currencyCode()),
-                                'rate' => fake()->randomFloat(5, 0, 2),
+                                'rate' => fake()->randomFloat(5,0,2),
                             ],
                         ],
                         'orderProducts' => [],
@@ -67,7 +67,7 @@ class FakeUserApi implements UserApiInterface
                             'type' => 'paymentProviderPaymentMethod',
                             'id' => fake()->randomNumber(),
                             'attributes' => (object)[
-                                'fee' => fake()->randomFloat(2, 0, 50),
+                                'fee' => fake()->randomFloat(2,0,50),
                             ],
                             'relationships' => (object)[
                                 'paymentMethod' => (object)[
@@ -91,7 +91,7 @@ class FakeUserApi implements UserApiInterface
                             'type' => 'payment',
                             'attributes' => (object)[
                                 'status' => 'INITIATED',
-                                'price' => fake()->randomFloat(2, 0, 50),
+                                'price' => fake()->randomFloat(2,0,50),
                             ],
                         ],
                         'user' => null,
@@ -123,7 +123,7 @@ class FakeUserApi implements UserApiInterface
                         'attributes' => (object)[
                             'name' => fake()->text(10),
                             'slug' => fake()->slug(),
-                            'pricePerUnit' => fake()->randomFloat(2, 1, 10),
+                            'pricePerUnit' => fake()->randomFloat(2,1,10),
                         ],
                     ],
                     'order' => (object)[
@@ -141,7 +141,7 @@ class FakeUserApi implements UserApiInterface
                                 'name' => fake()->currencyCode(),
                                 'code' => fake()->currencyCode(),
                                 'symbol' => Currencies::getSymbol(fake()->currencyCode()),
-                                'rate' => fake()->randomFloat(5, 0, 2),
+                                'rate' => fake()->randomFloat(5,0,2),
                             ],
                         ],
                         'orderProducts' => [],
@@ -149,7 +149,7 @@ class FakeUserApi implements UserApiInterface
                             'type' => 'paymentProviderPaymentMethod',
                             'id' => fake()->randomNumber(),
                             'attributes' => (object)[
-                                'fee' => fake()->randomFloat(2, 0, 50),
+                                'fee' => fake()->randomFloat(2,0,50),
                             ],
                             'relationships' => (object)[
                                 'paymentMethod' => (object)[
@@ -173,7 +173,7 @@ class FakeUserApi implements UserApiInterface
                             'type' => 'payment',
                             'attributes' => (object)[
                                 'status' => 'INITIATED',
-                                'price' => fake()->randomFloat(2, 0, 50),
+                                'price' => fake()->randomFloat(2,0,50),
                             ],
                         ],
                         'user' => null,
@@ -183,7 +183,7 @@ class FakeUserApi implements UserApiInterface
         }
     }
 
-    public function getOrderByOrderNumber(mixed $data): BaseApiResponse
+    public function getOrderByOrderNumber(string $orderNumber, mixed $data): BaseApiResponse
     {
         $data = [
             'id' => 1,
@@ -275,9 +275,9 @@ class FakeUserApi implements UserApiInterface
         session(['user-api-token' => $token]);
 
         return new LoginApiResponse(200, '', (object)[
-            "data" => (object)[
+            "data" => (object) [
                 "type" => "user",
-                "attributes" => (object)[
+                "attributes" => (object) [
                     "email" => $profileData->email ?? fake()->email(),
                     "token" => $token,
                     "firstName" => fake()->firstName(),

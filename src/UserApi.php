@@ -79,10 +79,12 @@ class UserApi extends RSGMApi implements UserApiInterface
     /**
      * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
      */
-    public function getOrderByOrderNumber(mixed $data): BaseApiResponse {
-        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.orderNumber'), [
-            'json' => $data
-        ]));
+    public function getOrderByOrderNumber(string $orderNumber, mixed $data): BaseApiResponse
+    {
+        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.orderNumber') . "/$orderNumber", [
+                'json' => $data
+            ]
+        ));
     }
 
     /**

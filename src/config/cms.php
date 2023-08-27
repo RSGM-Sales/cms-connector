@@ -20,7 +20,7 @@ return [
                 'create' => '/api/users/orders',
                 'history' => '/api/users/orders',
                 'productHistory' => '/api/users/orders/products',
-                'orderNumber' => '/api/users/orders/orderNumber',
+                'orderNumber' => '/api/users/orders/order-number/',
             ],
             'reviews' => [
                 'create' => '/api/reviews'

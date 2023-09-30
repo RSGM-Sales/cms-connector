@@ -26,14 +26,10 @@ class BaseApiResponse
     }
 
     public static function create(ResponseInterface $response): BaseApiResponse {
-        $instance = new self(
+        return new self(
             $response->getStatusCode(),
             $response->getReasonPhrase(),
             json_decode($response->getBody()->getContents(), true)
         );
-
-        $instance->response = $response;
-
-        return $instance;
     }
 }

@@ -36,18 +36,20 @@ class FakeSiteApi implements SiteApiInterface
 
     public function login(mixed $data): LoginApiResponse
     {
-        $token = fake()->uuid();
+        $token = '::TOKEN::';
+
         session(['user-api-token' => $token]);
 
         return new LoginApiResponse(200, '', (object)[
-            "data" => (object)[
+            "data" => (object) [
                 "type" => "user",
-                "attributes" => (object)[
-                    "username" => fake()->email(),
+                "attributes" => (object) [
+                    "username" => '::USERNAME::',
+                    "email" => '::EMAIL::',
                     "token" => $token,
-                    "firstName" => fake()->firstName(),
-                    "lastName" => fake()->lastName(),
-                    "marketingOptIn" => fake()->boolean()
+                    "firstName" => '::FIRST_NAME::',
+                    "lastName" => '::LAST_NAME::',
+                    "marketingOptIn" => true
                 ]
             ]
         ]);
@@ -60,21 +62,7 @@ class FakeSiteApi implements SiteApiInterface
 
     public function setNewPassword(mixed $data): LoginApiResponse
     {
-        $token = fake()->uuid();
-        session(['user-api-token' => $token]);
-
-        return new LoginApiResponse(200, '', (object)[
-            "data" => (object)[
-                "type" => "user",
-                "attributes" => (object)[
-                    "username" => fake()->email(),
-                    "token" => $token,
-                    "firstName" => fake()->firstName(),
-                    "lastName" => fake()->lastName(),
-                    "marketingOptIn" => fake()->boolean()
-                ]
-            ]
-        ]);
+       return $this->login($data);
     }
 
     public function register(mixed $data): BaseApiResponse

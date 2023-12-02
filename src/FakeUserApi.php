@@ -14,11 +14,16 @@ class FakeUserApi implements UserApiInterface
         return new BaseApiResponse();
     }
 
+    /** @throws \Exception */
     public function createOrder(mixed $data): BaseApiResponse
     {
+        if (is_null(session()->get('user-api-token'))) {
+            throw new \Exception('', \Symfony\Component\HttpFoundation\Response::HTTP_UNAUTHORIZED);
+        }
+
         return BaseApiResponse::create(
             new Response(
-                200,
+                \Symfony\Component\HttpFoundation\Response::HTTP_OK,
                 ['Content-Type' => 'application/json'],
                 json_encode(['redirectUrl' => $data['siteRedirectUrl']]),
             )

@@ -6,7 +6,6 @@ use RSGMSales\Connector\Contracts\SiteApiInterface;
 use RSGMSales\Connector\Responses\BaseApiResponse;
 use RSGMSales\Connector\Responses\LoginApiResponse;
 
-
 class FakeSiteApi implements SiteApiInterface
 {
     public function confirmEmail(mixed $data): BaseApiResponse
@@ -36,14 +35,14 @@ class FakeSiteApi implements SiteApiInterface
 
     public function login(mixed $data): LoginApiResponse
     {
-        $token = '::TOKEN::';
+        $token = $data['token']?? '::TOKEN::';
 
         session(['user-api-token' => $token]);
 
         return new LoginApiResponse(200, '', (object)[
-            "data" => (object) [
+            "data" => (object)[
                 "type" => "user",
-                "attributes" => (object) [
+                "attributes" => (object)[
                     "username" => '::USERNAME::',
                     "email" => '::EMAIL::',
                     "token" => $token,
@@ -62,7 +61,7 @@ class FakeSiteApi implements SiteApiInterface
 
     public function setNewPassword(mixed $data): LoginApiResponse
     {
-       return $this->login($data);
+        return $this->login('::TOKEN::');
     }
 
     public function register(mixed $data): BaseApiResponse

@@ -73,4 +73,8 @@ class FakeSiteApi implements SiteApiInterface
     {
         return new BaseApiResponse();
     }
+
+    public function getCoupon(mixed $data): BaseApiResponse {
+        return new BaseApiResponse();
+    }
 }

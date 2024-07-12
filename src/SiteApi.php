@@ -128,5 +128,9 @@ class SiteApi extends RSGMApi implements SiteApiInterface
         ]));
     }
 
-
+    public function getCoupon(mixed $data): BaseApiResponse {
+        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.getCouponByName'), [
+            'json' => $data
+        ]));
+    }
 }

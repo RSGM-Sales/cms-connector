@@ -13,6 +13,7 @@ return [
             'requestNewPassword' => '/api/users/request-new-password',
             'reviews' => '/api/reviews',
             'sendEmailConfirmationMail' => '/api/users/send-email-confirmation-mail',
+            'getCouponByName' => '/api/coupon',
         ],
         'user' => [
             'logout' => '/api/users/logout',

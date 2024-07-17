@@ -75,6 +75,15 @@ class FakeSiteApi implements SiteApiInterface
     }
 
     public function getCoupon(mixed $data): BaseApiResponse {
-        return new BaseApiResponse();
+        return new BaseApiResponse(200, '', [
+            "data" => (object)[
+                "type" => "coupon",
+                "id" => 1,
+                "attributes" => (object)[
+                    "code" => '::CODE::',
+                    "amount" => 100,
+                ]
+            ]
+        ]);
     }
 }

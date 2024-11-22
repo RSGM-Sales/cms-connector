@@ -35,7 +35,7 @@ class FakeSiteApi implements SiteApiInterface
 
     public function login(mixed $data): LoginApiResponse
     {
-        $token = $data['token']?? '::TOKEN::';
+        $token = $data['token'] ?? '::TOKEN::';
 
         session(['user-api-token' => $token]);
 
@@ -74,7 +74,8 @@ class FakeSiteApi implements SiteApiInterface
         return new BaseApiResponse();
     }
 
-    public function getCoupon(mixed $data): BaseApiResponse {
+    public function getCoupon(mixed $data): BaseApiResponse
+    {
         return new BaseApiResponse(200, '', [
             "data" => (object)[
                 "type" => "coupon",
@@ -87,9 +88,10 @@ class FakeSiteApi implements SiteApiInterface
         ]);
     }
 
-    public function getPriceCalculation(mixed $data): BaseApiResponse {
+    public function getPriceCalculation(mixed $data): BaseApiResponse
+    {
         return new BaseApiResponse(200, '', [
-            "data" => (object)  [
+            "data" => (object)[
                 'currency' => [
                     'id' => 1,
                     'iso_code' => 'EUR',
@@ -109,6 +111,7 @@ class FakeSiteApi implements SiteApiInterface
                     'without_coupon' => 100.0,
                     'with_coupon' => 100.0,
                 ],
-            ]);
+            ]
+        ]);
     }
 }

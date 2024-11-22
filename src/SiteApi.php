@@ -135,7 +135,7 @@ class SiteApi extends RSGMApi implements SiteApiInterface
     }
 
     public function getPriceCalculation(mixed $data): BaseApiResponse {
-        return BaseApiResponse::create($this->client->get(config('cms.endpoints.site.getPriceCalculation'), [
+        return BaseApiResponse::create($this->client->post(config('cms.endpoints.site.getPriceCalculation'), [
             'json' => $data
         ]));
     }

@@ -14,6 +14,7 @@ return [
             'reviews' => '/api/reviews',
             'sendEmailConfirmationMail' => '/api/users/send-email-confirmation-mail',
             'getCouponByName' => '/api/coupon',
+            'getPriceCalculation' => '/api/price-calculation',
         ],
         'user' => [
             'logout' => '/api/users/logout',

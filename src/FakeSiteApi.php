@@ -86,4 +86,29 @@ class FakeSiteApi implements SiteApiInterface
             ]
         ]);
     }
+
+    public function getPriceCalculation(mixed $data): BaseApiResponse {
+        return new BaseApiResponse(200, '', [
+            "data" => (object)  [
+                'currency' => [
+                    'id' => 1,
+                    'iso_code' => 'EUR',
+                    'rate' => 1.0,
+                ],
+                'amount_to_pay' => [
+                    'fee' => 0,
+                    'excluding_fees' => 10.0,
+                    'including_fees' => 10.0,
+                ],
+                'coupon' => [
+                    'id' => 1,
+                    'code' => 'get2',
+                    'percentage' => 2,
+                ],
+                'amount_to_receive' => [
+                    'without_coupon' => 100.0,
+                    'with_coupon' => 100.0,
+                ],
+            ]);
+    }
 }

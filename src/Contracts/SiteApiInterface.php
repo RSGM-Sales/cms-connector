@@ -18,4 +18,5 @@ interface SiteApiInterface
     public function sendEmailConfirmationMail(mixed $data): BaseApiResponse;
     public function setNewPassword(mixed $data): LoginApiResponse;
     public function getCoupon(mixed $data): BaseApiResponse;
+    public function getPriceCalculation(mixed $data): BaseApiResponse;
 }

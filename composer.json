@@ -8,11 +8,12 @@
     },
     "authors": [
         {
-            "name": "Mastermind West-Vlaanderen"
+            "name": "Mathias Vermeersch - Mavi-code"
         }
     ],
     "require": {
+        "php": "^8.2",
         "guzzlehttp/guzzle": "^7.0.1",
-        "illuminate/support": "^10.5"
+        "illuminate/support": "^11.0"
     }
 }

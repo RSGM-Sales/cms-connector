@@ -2,9 +2,7 @@
 
 namespace RSGMSales\Connector\Dto;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-
-class ApiUser extends Authenticatable
+class ApiUser
 {
     public string $email;
     public ?string $firstName;
@@ -19,8 +17,6 @@ class ApiUser extends Authenticatable
         $this->marketingOptIn = $marketingOptIn;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
-
-        parent::__construct();
     }
 
     public function token(): string {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RSGMSales\Connector;
 
-use Illuminate\Http\Response;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 use RSGMSales\Connector\Dto\ApiUser;

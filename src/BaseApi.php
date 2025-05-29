@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace RSGMSales\Connector;
 
-use Illuminate\Http\Response;
+use Illuminate\Http\Client\Response;
 use RSGMSales\Connector\Contracts\ApiInterface;
 use RSGMSales\Connector\Traits\GetUserIpAddress;
 

@@ -2,7 +2,7 @@
 
 namespace RSGMSales\Connector\Contracts;
 
-use Illuminate\Http\Response;
+use Illuminate\Http\Client\Response;
 
 interface ApiInterface
 {

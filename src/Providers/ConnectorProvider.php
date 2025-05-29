@@ -4,14 +4,11 @@ namespace RSGMSales\Connector\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use RSGMSales\Connector\Connector;
+use RSGMSales\Connector\SiteApi;
+use RSGMSales\Connector\UserApi;
 
 class ConnectorProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
     public function boot(): void
     {
         $this->publishes([
@@ -19,14 +16,14 @@ class ConnectorProvider extends ServiceProvider
         ]);
     }
 
-    public function register()
+    public function register(): void
     {
-        $this->app->bind('connector', function($app) {
-            return new Connector();
-        });
-
-        $this->mergeConfigFrom(
-            __DIR__.'/../config/cms.php','cms'
+        $this->app->singleton(
+            abstract: Connector::class,
+            concrete: new Connector(
+                siteApi: new SiteApi(),
+                userApi: new UserApi()
+            )
         );
     }
 }

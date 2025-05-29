@@ -2,117 +2,47 @@
 
 namespace RSGMSales\Connector;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
-use RSGMSales\Connector\Contracts\UserApiInterface;
-use RSGMSales\Connector\Dto\CreateOrderData;
-use RSGMSales\Connector\Dto\CreateReviewData;
-use RSGMSales\Connector\Dto\UserPreferencesData;
-use RSGMSales\Connector\Exceptions\MissingTokenException;
-use RSGMSales\Connector\Responses\BaseApiPagedResponse;
-use RSGMSales\Connector\Responses\BaseApiResponse;
-use RSGMSales\Connector\Responses\LoginApiResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
+use RSGMSales\Connector\Dto\ApiUser;
 
-class UserApi extends RSGMApi implements UserApiInterface
+class UserApi extends BaseApi
 {
-    /**
-     * @throws MissingTokenException
-     */
-    private function getClient(): Client {
-        // I'm choosing to create a new client here on every request because I'm not sure when the user api token is being set in the session
-        $token = session('user-api-token');
-        $site = config('connector.site.id');
+    protected function client(string $method, string $url, array $data = []): Response
+    {
+        /** @var ?ApiUser $user */
+        $user = Session::get('user');
 
-        if($token == null) {
-            throw new MissingTokenException();
+        if (! $user instanceof ApiUser) {
+            throw new \RuntimeException('User is not logged in or session is corrupted.');
         }
 
-        return new Client([
-            'base_uri' => config('connector.apiBaseUrl'),
-            'headers' => [
-                'Authorization' => "Bearer $token",
-                'Site-Id' => $site,
-                'User-IP' => $this->getUserIPAddress(),
-                'Content-Type' => 'application/json'
-            ]
+        $request = Http::withHeaders([
+            'Authorization' => "Bearer $user->token",
+            'Site-Id' => config('connector.site.id'),
+            'User-IP' => $this->getUserIPAddress(),
+            'Content-Type' => 'application/json'
         ]);
-    }
 
-    /**
-     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
-     */
-    public function createOrder(mixed $data): BaseApiResponse {
-        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.orders.create'), [
-            'json' => $data
-        ]));
-    }
+        $fullUrl = config('connector.apiBaseUrl') . $url;
 
-    /**
-     * @throws GuzzleException
-     * @throws MissingTokenException
-     */
-    public function createReview(mixed $data): BaseApiResponse
-    {
-        return BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.reviews.create'), [
-            'json' => $data
-        ]));
-    }
+        $response = match (strtolower($method)) {
+            'get' => $request->get($fullUrl, $data),
+            'post' => $request->post($fullUrl, $data),
+            'put' => $request->put($fullUrl, $data),
+            'patch' => $request->patch($fullUrl, $data),
+            'delete' => $request->delete($fullUrl, $data),
+            default => throw new \InvalidArgumentException("Unsupported HTTP method: $method"),
+        };
 
-    /**
-     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
-     */
-    public function getOrderHistory(mixed $data): BaseApiResponse {
-        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.history'), [
-            'json' => $data
-        ]));
-    }
-
-    /**
-     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
-     */
-    public function getOrderProductHistory(mixed $data): BaseApiResponse {
-        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.productHistory'), [
-            'json' => $data
-        ]));
-    }
-
-    /**
-     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
-     */
-    public function getOrderByOrderNumber(string $orderNumber, mixed $data): BaseApiResponse
-    {
-        return BaseApiResponse::create($this->getClient()->get(config('cms.endpoints.user.orders.orderNumber') . "$orderNumber", [
-                'json' => $data
-            ]
-        ));
-    }
-
-    /**
-     * @throws GuzzleException
-     * @throws MissingTokenException
-     */
-    public function logout(): BaseApiResponse
-    {
-        $response = BaseApiResponse::create($this->getClient()->post(config('cms.endpoints.user.logout')));
-
-        if($response->statusCode === 200)
-        {
-            session(['user-api-token' => null]);
+        if ($response->ok() && ($response->json('data.type.user'))) {
+            Session::put('user', ApiUser::fromResponse($response->json()));
         }
 
-        return $response;
-    }
-
-    /**
-     * @throws MissingTokenException|\GuzzleHttp\Exception\GuzzleException
-     */
-    public function updateProfile(mixed $data): LoginApiResponse {
-        $response = LoginApiResponse::create($this->getClient()->post(config('cms.endpoints.user.updateProfile'), [
-            'json' => $data
-        ]));
-
-        if($response->statusCode === 200) {
-            session(['user-api-token' => $response->user()->token()]);
+        if ($response->ok() && Str::contains($fullUrl, 'logout')) {
+            Session::forget('user');
         }
 
         return $response;

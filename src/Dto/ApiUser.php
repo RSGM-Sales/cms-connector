@@ -2,32 +2,27 @@
 
 namespace RSGMSales\Connector\Dto;
 
-class ApiUser
+use Illuminate\Support\Arr;
+
+readonly class ApiUser
 {
-    public string $email;
-    public ?string $firstName;
-    public ?string $lastName;
-    public bool $marketingOptIn;
-    private string $token;
+    public function __construct(
+        public string  $email,
+        public string  $token,
+        public bool    $marketingOptIn,
+        public string  $firstName,
+        public ?string $lastName = null,
+    ) {
+    }
 
-    public function __construct(string $email, string $token, string $marketingOptIn, string $firstName = null, string $lastName = null)
+    public static function fromResponse(array $response): self
     {
-        $this->email = $email;
-        $this->token = $token;
-        $this->marketingOptIn = $marketingOptIn;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-    }
-
-    public function token(): string {
-        return $this->token;
-    }
-
-    public static function create(string $email, string $token, string $marketingOptIn, string $firstName = null, string $lastName = null): ApiUser {
-        return new ApiUser($email, $token, $marketingOptIn, $firstName, $lastName);
-    }
-
-    public static function deserialize(mixed $data): ApiUser {
-        return ApiUser::create($data->attributes->email, $data->attributes->token, $data->attributes->marketingOptIn, $data->attributes->firstName, $data->attributes->lastName);
+        return new self(
+            email: Arr::get($response, 'data.attributes.email'),
+            token: Arr::get($response, 'data.attributes.token'),
+            marketingOptIn: Arr::get($response, 'data.attributes.marketingOptIn'),
+            firstName: Arr::get($response, 'data.attributes.firstName'),
+            lastName: Arr::get($response, 'data.attributes.lastName'),
+        );
     }
 }

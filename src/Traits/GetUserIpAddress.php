@@ -1,10 +1,9 @@
 <?php
 
-namespace RSGMSales\Connector;
+namespace RSGMSales\Connector\Traits;
 
-class RSGMApi
+trait GetUserIpAddress
 {
-
     protected function getUserIPAddress(): string {
         // It's possible that the user IP address is hidden inside a CloudFlare header
         // So we're going to see if the IP address is there first, before getting the default IP from the request
@@ -12,5 +11,4 @@ class RSGMApi
 
         return $cloudflareUserIP ?? request()->ip();
     }
-
 }

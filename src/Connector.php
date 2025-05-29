@@ -2,34 +2,20 @@
 
 namespace RSGMSales\Connector;
 
-use RSGMSales\Connector\Contracts\SiteApiInterface;
-use RSGMSales\Connector\Contracts\UserApiInterface;
+use RSGMSales\Connector\Contracts\ApiInterface;
 
 class Connector
 {
-    public SiteApiInterface $site;
-    public UserApiInterface $user;
+    public function __construct(
+        public readonly ApiInterface $siteApi,
+        public readonly ApiInterface $userApi
+    ) {
+    }
 
-    public function __construct()
+    public static function fake(): self
     {
-        $this->site = new SiteApi();
-        $this->user = new UserApi();
-    }
+        $fakeApi = new FakeApi();
 
-    public function site(): SiteApiInterface {
-        return $this->site;
-    }
-
-    public function user(): UserApiInterface {
-        return $this->user;
-    }
-
-    public static function fake(): Connector {
-        $instance = new Connector();
-
-        $instance->site = new FakeSiteApi();
-        $instance->user = new FakeUserApi();
-
-        return $instance;
+        return new self($fakeApi, $fakeApi);
     }
 }

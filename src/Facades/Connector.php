@@ -3,20 +3,18 @@
 namespace RSGMSales\Connector\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use RSGMSales\Connector\Contracts\SiteApiInterface;
-use RSGMSales\Connector\Contracts\UserApiInterface;
+use RSGMSales\Connector\Connector as ConnectorImplementation;
+use RSGMSales\Connector\Contracts\ApiInterface;
 
 /**
- * @method static \RSGMSales\Connector\Connector fake()
- * @method static SiteApiInterface site()
- * @method static UserApiInterface user()
+ * @method static ConnectorImplementation fake()
+ * @method static ApiInterface site()
+ * @method static ApiInterface user()
  */
 class Connector extends Facade
 {
-
     protected static function getFacadeAccessor(): string
     {
-        return 'connector';
+        return ConnectorImplementation::class;
     }
-
 }

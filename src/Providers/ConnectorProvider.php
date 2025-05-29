@@ -12,7 +12,7 @@ class ConnectorProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__.'/../config/connector.php' => config_path('connector.php'),
+            __DIR__ . '/../config/connector.php' => config_path('connector.php'),
         ]);
     }
 
@@ -20,7 +20,7 @@ class ConnectorProvider extends ServiceProvider
     {
         $this->app->singleton(
             abstract: Connector::class,
-            concrete: new Connector(
+            concrete: fn() => new Connector(
                 siteApi: new SiteApi(),
                 userApi: new UserApi()
             )

@@ -8,8 +8,8 @@ use RSGMSales\Connector\Contracts\ApiInterface;
 
 /**
  * @method static ConnectorImplementation fake()
- * @method static ApiInterface site()
- * @method static ApiInterface user()
+ * @method static ApiInterface siteApi()
+ * @method static ApiInterface userApi()
  */
 class Connector extends Facade
 {

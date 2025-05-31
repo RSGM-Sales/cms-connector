@@ -31,7 +31,7 @@ class SiteApi extends BaseApi
             default => throw new \InvalidArgumentException("Unsupported HTTP method: $method"),
         };
 
-        if ($response->ok() && ($response->json('data.type.user'))) {
+        if ($response->ok() && ($response->json('data.type') === 'user')) {
             Session::put('user', ApiUser::fromResponse($response->json()));
         }
 

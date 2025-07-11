@@ -10,7 +10,7 @@ readonly class ApiUser
         public string  $email,
         public string  $token,
         public bool    $marketingOptIn,
-        public string  $firstName,
+        public ?string  $firstName = null,
         public ?string $lastName = null,
     ) {
     }
